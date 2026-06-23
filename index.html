@@ -439,6 +439,10 @@
           linear-gradient(180deg, #d9f7ff 0%, #b8efff 46%, #9de4ff 100%);
       }
 
+      .game-screen.is-shaking {
+        animation: screenShake 260ms ease-out;
+      }
+
       .game-inner {
         height: 100%;
         display: grid;
@@ -454,32 +458,24 @@
 
       .game-top {
         display: grid;
-        grid-template-columns: 46px 1fr 46px;
+        grid-template-columns: 32px 1fr 32px;
         align-items: center;
         gap: 10px;
       }
 
       .round-btn {
-        width: 44px;
-        height: 44px;
+        width: 30px;
+        height: 34px;
         display: grid;
         place-items: center;
-        background: rgba(255, 255, 255, 0.9);
+        background: transparent;
         color: var(--blue-dark);
-        font-size: 23px;
+        font-size: 30px;
         font-weight: 1000;
-        box-shadow: 0 5px 0 rgba(7, 120, 202, 0.18);
       }
 
       .screen-title {
         text-align: center;
-      }
-
-      .screen-title small {
-        display: block;
-        color: #5798ba;
-        font-size: 10px;
-        font-weight: 1000;
       }
 
       .screen-title strong {
@@ -548,9 +544,12 @@
       .called-word {
         display: block;
         margin: 2px 0 0;
+        min-height: 42px;
+        overflow: hidden;
         font-size: clamp(29px, 8.4vw, 42px);
         line-height: 0.92;
         font-weight: 1000;
+        overflow-wrap: anywhere;
       }
 
       .call-subtitle {
@@ -589,23 +588,6 @@
         color: var(--blue-dark);
       }
 
-      .combo-row {
-        margin-top: 5px;
-        display: grid;
-        grid-template-columns: 76px 1fr;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .combo-chip {
-        padding: 5px 8px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.22);
-        font-size: 11px;
-        font-weight: 1000;
-        text-align: center;
-      }
-
       .fever-label {
         display: flex;
         justify-content: space-between;
@@ -626,6 +608,12 @@
         height: 100%;
         border-radius: inherit;
         background: linear-gradient(90deg, var(--yellow), #7eed84, #a4f3ff);
+        box-shadow: 0 0 0 rgba(255, 201, 76, 0);
+        transition: width 280ms cubic-bezier(0.17, 0.84, 0.38, 1);
+      }
+
+      .fever-bank.is-charging .fever-fill {
+        animation: feverFillGlow 720ms ease-out;
       }
 
       .call-orb {
@@ -731,19 +719,25 @@
 
       .tile b {
         max-width: 100%;
-        white-space: normal;
+        display: -webkit-box;
+        overflow: hidden;
         font-size: clamp(10px, 2.85vw, 13px);
         line-height: 1.02;
         font-weight: 1000;
+        overflow-wrap: anywhere;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
 
       .tile small {
         max-width: 100%;
-        white-space: normal;
+        overflow: hidden;
         color: #778897;
         font-size: 7.5px;
         line-height: 1;
         font-weight: 900;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .tile.is-called:not(.is-selected) {
@@ -808,44 +802,110 @@
 
       .board-footer {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 114px;
+        grid-template-columns: minmax(0, 1fr) 122px;
         gap: 9px;
         align-items: center;
       }
 
-      .line-bank {
+      .fever-bank {
+        position: relative;
         height: 58px;
-        display: flex;
-        align-items: center;
+        display: grid;
+        align-content: center;
         gap: 7px;
         min-width: 0;
-        padding: 10px;
+        padding: 11px 16px;
+        overflow: hidden;
         border-radius: 24px;
         background: rgba(255, 255, 255, 0.62);
       }
 
-      .line-dot {
-        width: 27px;
-        height: 27px;
-        flex: 0 0 auto;
-        border-radius: 50%;
-        background: #f4fbff;
-        box-shadow: inset 0 0 0 3px #cce9fa;
+      .fever-bank::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.66) 42%, transparent 72%);
+        opacity: 0;
+        transform: translateX(-120%);
       }
 
-      .line-dot.is-on {
-        background: linear-gradient(180deg, #fff6b7, var(--yellow));
-        box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.48), 0 0 0 3px rgba(255, 201, 76, 0.24);
+      .fever-bank.is-charging {
+        animation: feverBankPulse 360ms ease-out;
       }
 
-      .line-caption {
+      .fever-bank.has-charge {
+        box-shadow: 0 0 0 1px rgba(255, 201, 76, 0.12), 0 10px 24px rgba(255, 201, 76, 0.12);
+      }
+
+      .fever-bank.is-charging::before {
+        animation: feverSweep 460ms ease-out;
+      }
+
+      .fever-bank .fever-label {
+        margin: 0;
+        color: var(--blue-dark);
+      }
+
+      .fever-bank .fever-label span {
         min-width: 0;
+      }
+
+      .fever-bank .fever-label span:first-child {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: #5d7380;
-        font-size: 12px;
-        font-weight: 1000;
+      }
+
+      .fever-bank .fever-track {
+        position: relative;
+        background: #d4eef8;
+        box-shadow: inset 0 0 0 1px rgba(8, 120, 202, 0.08);
+      }
+
+      .fever-bank .fever-track::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.42) 0 8px, transparent 8px 16px);
+        mix-blend-mode: screen;
+        opacity: 0.46;
+      }
+
+      .bingo-stack {
+        display: grid;
+        justify-items: center;
+        gap: 8px;
+      }
+
+      .line-dots {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+      }
+
+      .line-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .line-dot.is-on {
+        background: var(--yellow);
+      }
+
+      .line-count {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      .bingo-button {
+        width: 100%;
       }
 
       .bingo-button,
@@ -879,86 +939,149 @@
         50% { box-shadow: 0 7px 0 #c77a00, 0 0 0 8px rgba(255, 201, 76, 0.3); }
       }
 
-      .toast,
+      .feedback,
       .summary {
         position: absolute;
         pointer-events: none;
         opacity: 0;
       }
 
-      .toast {
+      .feedback {
         z-index: 8;
-        left: auto;
-        right: 24px;
-        top: 137px;
-        width: 126px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 7px;
-        padding: 8px 10px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.94);
-        box-shadow: var(--soft-shadow);
-        transform: translateY(-8px) scale(0.98);
-        transition: opacity 160ms ease, transform 160ms ease;
+        left: 50%;
+        top: 50%;
+        width: 250px;
+        min-height: 250px;
+        display: grid;
+        place-items: center;
+        gap: 2px;
+        padding: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 26%, rgba(255, 255, 255, 0.74) 43%, rgba(255, 255, 255, 0.28) 62%, rgba(255, 255, 255, 0) 76%);
+        filter: drop-shadow(0 22px 42px rgba(0, 92, 150, 0.2));
+        text-align: center;
+        contain: layout paint;
+        will-change: opacity, transform;
+        transform: translate(-50%, -50%) scale(0.78);
       }
 
-      .toast.is-visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+      .feedback.is-visible {
+        animation: feedbackPop 1300ms cubic-bezier(0.17, 1.32, 0.44, 1) forwards;
       }
 
-      .toast strong {
-        display: block;
-        overflow: hidden;
-        font-size: 11px;
-        line-height: 1;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .toast span {
-        color: var(--muted);
-        display: none;
-        font-size: 10px;
-        font-weight: 800;
-      }
-
-      .toast-score {
-        color: var(--blue);
-        flex: 0 0 auto;
-        font-size: 21px;
-        line-height: 1;
-        font-weight: 1000;
-      }
-
-      .float-layer {
+      .feedback::before {
+        content: "";
         position: absolute;
+        z-index: -1;
+        inset: -2px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.74) 0 24%, rgba(255, 236, 156, 0.44) 42%, rgba(255, 201, 76, 0.2) 58%, transparent 74%);
+        opacity: 0;
+        transform: scale(0.78);
+        animation: feedbackAura 860ms ease-out forwards;
+      }
+
+      .feedback.is-combo::before {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.74) 0 24%, rgba(255, 236, 156, 0.44) 42%, rgba(255, 201, 76, 0.2) 58%, transparent 74%);
+      }
+
+      .feedback::after {
+        content: "";
+        position: absolute;
+        z-index: 0;
         inset: 0;
-        z-index: 7;
-        pointer-events: none;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 7%, rgba(255, 201, 76, 0.74) 0 5px, transparent 13px),
+          radial-gradient(circle at 79% 22%, rgba(255, 201, 76, 0.6) 0 6px, transparent 15px),
+          radial-gradient(circle at 86% 58%, rgba(255, 201, 76, 0.52) 0 7px, transparent 17px),
+          radial-gradient(circle at 61% 87%, rgba(255, 201, 76, 0.58) 0 5px, transparent 15px),
+          radial-gradient(circle at 23% 75%, rgba(255, 201, 76, 0.5) 0 6px, transparent 16px),
+          radial-gradient(circle at 15% 30%, rgba(255, 201, 76, 0.56) 0 5px, transparent 14px),
+          radial-gradient(circle, transparent 0 42%, rgba(255, 201, 76, 0.18) 43%, rgba(255, 201, 76, 0.3) 48%, rgba(255, 201, 76, 0.12) 55%, transparent 68%);
+        opacity: 0;
+        transform: scale(0.76);
       }
 
-      .float-pop {
-        position: absolute;
-        left: var(--x, 50%);
-        top: var(--y, 50%);
-        padding: 5px 8px;
-        border-radius: 999px;
-        background: white;
-        color: var(--blue-dark);
-        font-size: 11px;
+      .feedback.is-combo::after {
+        background:
+          radial-gradient(circle at 50% 7%, rgba(255, 201, 76, 0.74) 0 5px, transparent 13px),
+          radial-gradient(circle at 79% 22%, rgba(255, 201, 76, 0.6) 0 6px, transparent 15px),
+          radial-gradient(circle at 86% 58%, rgba(255, 201, 76, 0.52) 0 7px, transparent 17px),
+          radial-gradient(circle at 61% 87%, rgba(255, 201, 76, 0.58) 0 5px, transparent 15px),
+          radial-gradient(circle at 23% 75%, rgba(255, 201, 76, 0.5) 0 6px, transparent 16px),
+          radial-gradient(circle at 15% 30%, rgba(255, 201, 76, 0.56) 0 5px, transparent 14px),
+          radial-gradient(circle, transparent 0 42%, rgba(255, 201, 76, 0.18) 43%, rgba(255, 201, 76, 0.3) 48%, rgba(255, 201, 76, 0.12) 55%, transparent 68%);
+      }
+
+      .feedback.is-visible::after {
+        animation: feedbackStarburst 1300ms ease-out forwards;
+      }
+
+      .feedback-content {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        gap: 4px;
+        padding: 18px 24px;
+        border-radius: 50%;
+      }
+
+      .feedback-kicker {
+        color: var(--pink);
+        font-size: 16px;
+        line-height: 1;
         font-weight: 1000;
-        box-shadow: var(--soft-shadow);
-        transform: translate(-50%, -50%);
-        animation: pop 820ms ease forwards;
       }
 
-      .float-pop.is-fever {
-        background: linear-gradient(90deg, var(--yellow), #72e97d);
-        color: #17350b;
+      .feedback-value {
+        color: var(--blue-dark);
+        font-size: 46px;
+        line-height: 1;
+        font-weight: 1000;
+      }
+
+      .feedback-caption {
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1;
+        font-weight: 1000;
+      }
+
+      .feedback.is-combo .feedback-value,
+      .feedback.is-combo .feedback-kicker {
+        color: var(--pink);
+      }
+
+      .feedback-particles {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+        z-index: 1;
+        contain: layout paint;
+      }
+
+      .feedback-particle {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--size);
+        height: var(--size);
+        border-radius: 999px;
+        background: var(--particle-color);
+        box-shadow: 0 0 16px var(--particle-glow);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4);
+        will-change: transform, opacity;
+      }
+
+      .feedback.is-visible .feedback-particle {
+        animation: particleBurst 1120ms cubic-bezier(0.12, 0.82, 0.2, 1) forwards;
+        animation-delay: var(--delay);
       }
 
       .stage-banner {
@@ -1001,10 +1124,58 @@
         font-weight: 1000;
       }
 
-      @keyframes pop {
-        0% { opacity: 0; transform: translate(-50%, -30%) scale(0.8); }
-        18% { opacity: 1; transform: translate(-50%, -72%) scale(1); }
-        100% { opacity: 0; transform: translate(-50%, -98%) scale(0.96); }
+      @keyframes feedbackPop {
+        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.72); }
+        18% { opacity: 1; transform: translate(-50%, -50%) scale(1.22); }
+        48% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        82% { opacity: 1; transform: translate(-50%, -50%) scale(0.96); }
+        100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+      }
+
+      @keyframes feedbackAura {
+        0% { opacity: 0; transform: scale(0.72); }
+        16% { opacity: 0.95; transform: scale(0.96); }
+        100% { opacity: 0; transform: scale(1.22); }
+      }
+
+      @keyframes feedbackStarburst {
+        0% { opacity: 0; transform: scale(0.78); }
+        18% { opacity: 0.92; transform: scale(1.02); }
+        58% { opacity: 0.42; }
+        100% { opacity: 0; transform: scale(1.28); }
+      }
+
+      @keyframes particleBurst {
+        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+        14% { opacity: 1; }
+        62% { opacity: 0.94; }
+        100% { opacity: 0; transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.72); }
+      }
+
+      @keyframes feverBankPulse {
+        0% { box-shadow: 0 0 0 0 rgba(255, 201, 76, 0); transform: scale(1); }
+        34% { box-shadow: 0 0 0 5px rgba(255, 201, 76, 0.22); transform: scale(1.018); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 201, 76, 0); transform: scale(1); }
+      }
+
+      @keyframes feverSweep {
+        0% { opacity: 0; transform: translateX(-120%); }
+        28% { opacity: 0.9; }
+        100% { opacity: 0; transform: translateX(120%); }
+      }
+
+      @keyframes feverFillGlow {
+        0% { filter: saturate(1); box-shadow: 0 0 0 rgba(255, 201, 76, 0); }
+        32% { filter: saturate(1.35); box-shadow: 0 0 18px rgba(255, 201, 76, 0.7); }
+        100% { filter: saturate(1); box-shadow: 0 0 0 rgba(255, 201, 76, 0); }
+      }
+
+      @keyframes screenShake {
+        0%, 100% { transform: translate3d(0, 0, 0); }
+        18% { transform: translate3d(-3px, 2px, 0); }
+        36% { transform: translate3d(3px, -2px, 0); }
+        54% { transform: translate3d(-2px, -1px, 0); }
+        72% { transform: translate3d(2px, 1px, 0); }
       }
 
       @keyframes bannerPop {
@@ -1086,11 +1257,12 @@
 
       .summary-actions {
         display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
       }
 
       .secondary-action {
-        min-height: 50px;
+        min-height: 56px;
         background: white;
         color: var(--blue-dark);
         font-size: 15px;
@@ -1136,7 +1308,7 @@
         }
 
         .board-footer {
-          grid-template-columns: minmax(0, 1fr) 102px;
+          grid-template-columns: minmax(0, 1fr) 112px;
           gap: 8px;
         }
 
@@ -1149,9 +1321,13 @@
           right: 42px;
         }
 
-        .toast {
-          right: 18px;
-          width: 116px;
+        .feedback {
+          width: 226px;
+          min-height: 226px;
+        }
+
+        .feedback-value {
+          font-size: 42px;
         }
       }
     </style>
@@ -1260,10 +1436,9 @@
             <div class="game-top">
               <button class="round-btn" id="backButton" type="button" aria-label="Back to Pinu">‹</button>
               <div class="screen-title">
-                <small>SECTION 1, UNIT 1</small>
                 <strong>Bingo Challenge</strong>
               </div>
-              <button class="round-btn" id="restartButton" type="button" aria-label="Restart Bingo Challenge">↻</button>
+              <span aria-hidden="true"></span>
             </div>
 
             <div class="score-row" aria-live="polite">
@@ -1278,16 +1453,6 @@
                 <strong class="called-word" id="calledWord">Ready?</strong>
                 <div class="call-subtitle" id="callSubtitle">Tap a called word to score.</div>
                 <div class="recent-words" id="recentWords" aria-label="Recently called words"></div>
-                <div class="combo-row">
-                  <div class="combo-chip" id="comboChip">Combo x0</div>
-                  <div>
-                    <div class="fever-label">
-                      <span id="feverLabel">FEVER</span>
-                      <span id="feverValue">0%</span>
-                    </div>
-                    <div class="fever-track"><div class="fever-fill" id="feverFill"></div></div>
-                  </div>
-                </div>
               </div>
               <div class="call-orb" id="callOrb" aria-hidden="true">
                 <strong>GO</strong>
@@ -1301,26 +1466,35 @@
               </div>
               <div class="board" id="board" aria-label="Bingo word card"></div>
               <div class="board-footer">
-                <div class="line-bank" aria-label="Claimed Bingo lines">
-                  <span class="line-dot" data-line-dot="0"></span>
-                  <span class="line-dot" data-line-dot="1"></span>
-                  <span class="line-dot" data-line-dot="2"></span>
-                  <span class="line-dot" data-line-dot="3"></span>
-                  <span class="line-caption" id="lineCaption">Ready</span>
+                <div class="fever-bank" id="feverBank">
+                  <div class="fever-label">
+                    <span id="feverLabel">FEVER x1.0</span>
+                    <span id="feverValue">0%</span>
+                  </div>
+                  <div class="fever-track"><div class="fever-fill" id="feverFill"></div></div>
                 </div>
-                <button class="bingo-button" id="bingoButton" type="button">Bingo</button>
+                <div class="bingo-stack" aria-label="Claimed Bingo lines">
+                  <button class="bingo-button" id="bingoButton" type="button">Bingo</button>
+                  <div class="line-dots" aria-hidden="true">
+                    <span class="line-dot" data-line-dot="0"></span>
+                    <span class="line-dot" data-line-dot="1"></span>
+                    <span class="line-dot" data-line-dot="2"></span>
+                    <span class="line-dot" data-line-dot="3"></span>
+                  </div>
+                  <span class="line-count" id="lineCaption">Ready</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="toast" id="toast" aria-live="polite">
-            <div>
-              <strong id="toastTitle">Nice!</strong>
-              <span id="toastBody">+30 speed</span>
+          <div class="feedback" id="feedback" aria-live="polite">
+            <div class="feedback-content">
+              <div class="feedback-kicker" id="feedbackKicker">NICE</div>
+              <div class="feedback-value" id="feedbackValue">+30</div>
+              <div class="feedback-caption" id="feedbackCaption">SPEED + COMBO</div>
             </div>
-            <div class="toast-score" id="toastScore">+30</div>
+            <div class="feedback-particles" id="feedbackParticles" aria-hidden="true"></div>
           </div>
-          <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
           <div class="stage-banner" id="stageBanner" aria-live="polite">
             <strong id="stageBannerTitle">BINGO!</strong>
             <span id="stageBannerBody">+300</span>
@@ -1355,6 +1529,7 @@
       const GAME_SECONDS = 75;
       const CALL_INTERVAL_MS = 3000;
       const FEVER_DURATION_MS = 9000;
+      const PARTICLE_COUNT = 34;
       const SCORING = {
         clickBase: 20,
         clickSpeedStart: 50,
@@ -1442,9 +1617,13 @@
         callerId: 0,
         callStartedAt: 0,
         progressFrame: 0,
-        toastId: 0,
+        feedbackId: 0,
+        feverPulseId: 0,
+        shakeId: 0,
         bannerId: 0
       };
+
+      let audioContext = null;
 
       const els = {
         homeScreen: document.getElementById("homeScreen"),
@@ -1454,7 +1633,6 @@
         homePlay: document.getElementById("homePlay"),
         taskPlay: document.getElementById("taskPlay"),
         backButton: document.getElementById("backButton"),
-        restartButton: document.getElementById("restartButton"),
         board: document.getElementById("board"),
         timeLeft: document.getElementById("timeLeft"),
         score: document.getElementById("score"),
@@ -1464,17 +1642,17 @@
         recentWords: document.getElementById("recentWords"),
         callOrb: document.getElementById("callOrb"),
         callCount: document.getElementById("callCount"),
-        comboChip: document.getElementById("comboChip"),
+        feverBank: document.getElementById("feverBank"),
         feverLabel: document.getElementById("feverLabel"),
         feverValue: document.getElementById("feverValue"),
         feverFill: document.getElementById("feverFill"),
         lineCaption: document.getElementById("lineCaption"),
         bingoButton: document.getElementById("bingoButton"),
-        toast: document.getElementById("toast"),
-        toastTitle: document.getElementById("toastTitle"),
-        toastBody: document.getElementById("toastBody"),
-        toastScore: document.getElementById("toastScore"),
-        floatLayer: document.getElementById("floatLayer"),
+        feedback: document.getElementById("feedback"),
+        feedbackKicker: document.getElementById("feedbackKicker"),
+        feedbackValue: document.getElementById("feedbackValue"),
+        feedbackCaption: document.getElementById("feedbackCaption"),
+        feedbackParticles: document.getElementById("feedbackParticles"),
         stageBanner: document.getElementById("stageBanner"),
         stageBannerTitle: document.getElementById("stageBannerTitle"),
         stageBannerBody: document.getElementById("stageBannerBody"),
@@ -1502,7 +1680,9 @@
       function resetGameState() {
         window.clearInterval(state.timerId);
         window.clearInterval(state.callerId);
-        window.clearTimeout(state.toastId);
+        window.clearTimeout(state.feedbackId);
+        window.clearTimeout(state.feverPulseId);
+        window.clearTimeout(state.shakeId);
         window.clearTimeout(state.bannerId);
         window.cancelAnimationFrame(state.progressFrame);
         if ("speechSynthesis" in window) {
@@ -1530,11 +1710,12 @@
         state.feverTriggered = false;
         state.running = false;
         state.callStartedAt = 0;
-        els.floatLayer.innerHTML = "";
-        els.toast.classList.remove("is-visible");
+        els.feedbackParticles.innerHTML = "";
+        els.feedback.classList.remove("is-visible", "is-combo");
+        els.feverBank.classList.remove("has-charge", "is-charging");
         els.stageBanner.classList.remove("is-visible", "is-bingo");
         els.summary.classList.remove("is-visible");
-        els.gameScreen.classList.remove("is-fever", "is-urgent");
+        els.gameScreen.classList.remove("is-fever", "is-urgent", "is-shaking");
         setCallProgress(0);
       }
 
@@ -1573,7 +1754,19 @@
         state.callerId = window.setInterval(callNextWord, CALL_INTERVAL_MS);
       }
 
+      function setupFeedbackParticles() {
+        if (els.feedbackParticles.childElementCount === PARTICLE_COUNT) return;
+        const fragment = document.createDocumentFragment();
+        for (let index = 0; index < PARTICLE_COUNT; index += 1) {
+          const particle = document.createElement("span");
+          particle.className = "feedback-particle";
+          fragment.appendChild(particle);
+        }
+        els.feedbackParticles.replaceChildren(fragment);
+      }
+
       function showOnlyGame() {
+        setupFeedbackParticles();
         document.querySelectorAll(".app-screen").forEach((screen) => screen.classList.remove("is-active"));
         els.gameScreen.classList.add("is-active");
       }
@@ -1661,6 +1854,7 @@
         const speedBonus = Math.max(0, Math.round(SCORING.clickSpeedStart - elapsedSeconds * SCORING.clickSpeedDecay));
         const comboBonus = Math.min(state.combo * SCORING.comboStep, SCORING.comboMax);
         let feverStarted = false;
+        const previousFeverCharge = state.feverCharge;
         state.feverCharge = Math.min(
           100,
           state.feverCharge + SCORING.feverGainBase + Math.min(state.combo, SCORING.feverGainComboCap) * SCORING.feverGainComboStep
@@ -1685,9 +1879,18 @@
         state.wordScore += points;
         updateLineCompletionTimes();
         render();
+        pulseFeverCharge(previousFeverCharge, state.feverCharge);
 
-        showToast(feverStarted ? "Fever on!" : "Nice tap", `+${speedBonus} speed / +${comboBonus} combo`, `+${points}`);
-        showFloat(feverStarted ? "FEVER!" : state.combo >= 3 ? `Combo x${state.combo}` : `+${points}`, index, feverStarted);
+        if (feverStarted) {
+          showFeedback("combo", "FEVER", "ON", "BONUS SCORING");
+          playComboSound();
+        } else if (state.combo >= 3) {
+          showFeedback("combo", "COMBO", `x${state.combo}`, `+${points} POINTS`);
+          playComboSound();
+        } else {
+          showFeedback("score", "NICE", `+${points}`, "SPEED + COMBO");
+          playCorrectSound();
+        }
         if (feverStarted) {
           showStageBanner("FEVER!", "Bonus scoring is on", true);
         }
@@ -1733,9 +1936,10 @@
         state.score += earned;
         state.bingoScore += earned;
         render();
-        showToast("Bingo!", `${newLines.length} new line${newLines.length > 1 ? "s" : ""}`, `+${earned}`);
+        showFeedback("score", "BINGO", `+${earned}`, `${newLines.length} NEW LINE${newLines.length > 1 ? "S" : ""}`);
         showStageBanner("BINGO!", `+${earned}`, true);
-        showFloat("BINGO BONUS", null, true);
+        playBingoSound();
+        shakeScreen();
       }
 
       function finishGame() {
@@ -1810,10 +2014,10 @@
         const active = isFeverActive();
         const remaining = Math.max(0, state.feverUntil - performance.now());
         const feverProgress = active ? remaining / FEVER_DURATION_MS : state.feverCharge / 100;
-        els.comboChip.textContent = `Combo x${state.combo}`;
-        els.feverLabel.textContent = active ? "FEVER x1.5" : "FEVER";
+        els.feverLabel.textContent = active ? "FEVER x1.5" : "FEVER x1.0";
         els.feverValue.textContent = active ? `${Math.ceil(remaining / 1000)}s` : `${Math.round(state.feverCharge)}%`;
         els.feverFill.style.setProperty("--fever", String(Math.max(0, Math.min(1, feverProgress))));
+        els.feverBank.classList.toggle("has-charge", active || state.feverCharge > 0);
         els.gameScreen.classList.toggle("is-fever", active);
       }
 
@@ -1849,13 +2053,108 @@
         return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
       }
 
-      function showToast(title, body, score) {
-        window.clearTimeout(state.toastId);
-        els.toastTitle.textContent = title;
-        els.toastBody.textContent = body;
-        els.toastScore.textContent = score;
-        els.toast.classList.add("is-visible");
-        state.toastId = window.setTimeout(() => els.toast.classList.remove("is-visible"), 1300);
+      function showFeedback(kind, kicker, value, caption) {
+        window.clearTimeout(state.feedbackId);
+        els.feedbackKicker.textContent = kicker;
+        els.feedbackValue.textContent = value;
+        els.feedbackCaption.textContent = caption;
+        els.feedback.classList.toggle("is-combo", kind === "combo");
+        renderFeedbackParticles(kind);
+        els.feedback.classList.remove("is-visible");
+        void els.feedback.offsetWidth;
+        els.feedback.classList.add("is-visible");
+        state.feedbackId = window.setTimeout(() => els.feedback.classList.remove("is-visible"), 1300);
+      }
+
+      function renderFeedbackParticles(kind) {
+        setupFeedbackParticles();
+        const colors = kind === "combo" ? ["#f65798", "#ffc94c", "#9d76ff", "#ffffff", "#35caef"] : ["#1298ee", "#35caef", "#ffc94c", "#ffffff", "#45c96d"];
+        [...els.feedbackParticles.children].forEach((particle, index) => {
+          const ring = index % 3;
+          const angle = (Math.PI * 2 * index) / PARTICLE_COUNT + (ring * 0.19);
+          const distance = 96 + ring * 28 + (index % 5) * 9;
+          const size = 4 + (index % 5) * 2;
+          const color = colors[index % colors.length];
+          particle.style.setProperty("--tx", `${Math.cos(angle) * distance}px`);
+          particle.style.setProperty("--ty", `${Math.sin(angle) * distance}px`);
+          particle.style.setProperty("--size", `${size}px`);
+          particle.style.setProperty("--delay", `${(index % 7) * 12}ms`);
+          particle.style.setProperty("--particle-color", color);
+          particle.style.setProperty("--particle-glow", color);
+        });
+      }
+
+      function pulseFeverCharge(previousCharge, nextCharge) {
+        if (nextCharge <= previousCharge && nextCharge !== 0) return;
+        window.clearTimeout(state.feverPulseId);
+        els.feverBank.classList.remove("is-charging");
+        void els.feverBank.offsetWidth;
+        els.feverBank.classList.add("is-charging");
+        state.feverPulseId = window.setTimeout(() => els.feverBank.classList.remove("is-charging"), 760);
+      }
+
+      function shakeScreen() {
+        window.clearTimeout(state.shakeId);
+        els.gameScreen.classList.remove("is-shaking");
+        void els.gameScreen.offsetWidth;
+        els.gameScreen.classList.add("is-shaking");
+        if (navigator.vibrate) {
+          navigator.vibrate(45);
+        }
+        state.shakeId = window.setTimeout(() => els.gameScreen.classList.remove("is-shaking"), 280);
+      }
+
+      function getAudioContext() {
+        if (!audioContext) {
+          const Context = window.AudioContext || window.webkitAudioContext;
+          if (!Context) return null;
+          audioContext = new Context();
+        }
+        if (audioContext.state === "suspended") {
+          audioContext.resume();
+        }
+        return audioContext;
+      }
+
+      function playTone(frequency, start, duration, type, volume) {
+        const context = getAudioContext();
+        if (!context) return;
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = type;
+        oscillator.frequency.setValueAtTime(frequency, start);
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(volume, start + 0.018);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+        oscillator.connect(gain).connect(context.destination);
+        oscillator.start(start);
+        oscillator.stop(start + duration + 0.02);
+      }
+
+      function playCorrectSound() {
+        const context = getAudioContext();
+        if (!context) return;
+        const now = context.currentTime;
+        playTone(660, now, 0.09, "sine", 0.045);
+        playTone(990, now + 0.055, 0.11, "triangle", 0.035);
+      }
+
+      function playComboSound() {
+        const context = getAudioContext();
+        if (!context) return;
+        const now = context.currentTime;
+        playTone(520, now, 0.08, "triangle", 0.04);
+        playTone(780, now + 0.045, 0.1, "triangle", 0.045);
+        playTone(1240, now + 0.11, 0.14, "sine", 0.035);
+      }
+
+      function playBingoSound() {
+        const context = getAudioContext();
+        if (!context) return;
+        const now = context.currentTime;
+        playTone(392, now, 0.11, "triangle", 0.05);
+        playTone(587, now + 0.08, 0.13, "triangle", 0.055);
+        playTone(784, now + 0.17, 0.2, "sine", 0.052);
       }
 
       function showStageBanner(title, body, isBingo) {
@@ -1882,27 +2181,9 @@
         window.setTimeout(() => tile.classList.remove("is-invalid"), 200);
       }
 
-      function showFloat(text, index, fever) {
-        const pop = document.createElement("div");
-        pop.className = "float-pop" + (fever ? " is-fever" : "");
-        pop.textContent = text;
-        if (typeof index === "number") {
-          const tile = els.board.querySelector(`[data-index="${index}"]`);
-          if (tile) {
-            const tileRect = tile.getBoundingClientRect();
-            const screenRect = els.gameScreen.getBoundingClientRect();
-            pop.style.setProperty("--x", `${tileRect.right - 14 - screenRect.left}px`);
-            pop.style.setProperty("--y", `${tileRect.top + 14 - screenRect.top}px`);
-          }
-        }
-        els.floatLayer.appendChild(pop);
-        window.setTimeout(() => pop.remove(), 840);
-      }
-
       els.homePlay.addEventListener("click", () => startGame("home"));
       els.taskPlay.addEventListener("click", () => startGame("tasks"));
       els.backButton.addEventListener("click", () => showApp(state.returnTab));
-      els.restartButton.addEventListener("click", () => startGame(state.returnTab));
       els.bingoButton.addEventListener("click", claimBingo);
       els.playAgain.addEventListener("click", () => startGame(state.returnTab));
       els.summaryHome.addEventListener("click", () => showApp(state.returnTab));
