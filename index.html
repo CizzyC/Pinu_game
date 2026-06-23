@@ -61,6 +61,7 @@
       }
 
       .stage {
+        position: relative;
         width: min(100vw, 980px);
         min-height: 100vh;
         display: grid;
@@ -78,6 +79,37 @@
         outline: 9px solid rgba(255, 255, 255, 0.78);
         background: var(--bg);
         box-shadow: 0 24px 68px rgba(4, 104, 170, 0.3);
+      }
+
+      .gloss-toggle-demo {
+        position: absolute;
+        z-index: 12;
+        left: calc(50% + 230px);
+        top: 50%;
+        width: 48px;
+        min-height: 132px;
+        display: none;
+        place-items: center;
+        padding: 8px 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.82);
+        color: var(--blue-dark);
+        font-size: 10px;
+        font-weight: 1000;
+        line-height: 1.08;
+        text-align: center;
+        box-shadow: 0 12px 28px rgba(0, 82, 130, 0.14);
+        transform: translateY(-50%);
+      }
+
+      .stage.is-game .gloss-toggle-demo {
+        display: grid;
+      }
+
+      .gloss-toggle-demo.is-on {
+        background: linear-gradient(180deg, #8cf5ff 0%, #20bef1 56%, #0e91df 100%);
+        color: white;
+        box-shadow: 0 8px 0 #0878ca, 0 16px 30px rgba(0, 82, 130, 0.18);
       }
 
       .screen {
@@ -446,7 +478,7 @@
       .game-inner {
         height: 100%;
         display: grid;
-        grid-template-rows: auto auto auto auto minmax(0, 1fr);
+        grid-template-rows: auto auto auto auto auto;
         gap: 8px;
         padding: 0 24px 14px;
       }
@@ -519,7 +551,8 @@
       }
 
       .caller-card {
-        min-height: 112px;
+        height: 126px;
+        min-height: 0;
         display: grid;
         grid-template-columns: 1fr 82px;
         gap: 10px;
@@ -535,6 +568,11 @@
         background: linear-gradient(145deg, #18b4f4 0%, #1298ee 45%, #8a69f8 100%);
       }
 
+      .caller-copy {
+        min-width: 0;
+        overflow: hidden;
+      }
+
       .caller-copy > span {
         display: block;
         font-size: 10px;
@@ -542,21 +580,25 @@
       }
 
       .called-word {
+        max-width: 100%;
         display: block;
         margin: 2px 0 0;
         min-height: 42px;
         overflow: hidden;
-        font-size: clamp(29px, 8.4vw, 42px);
+        font-size: var(--fit-size, clamp(29px, 8.4vw, 42px));
         line-height: 0.92;
         font-weight: 1000;
-        overflow-wrap: anywhere;
+        white-space: nowrap;
       }
 
       .call-subtitle {
         min-height: 16px;
-        font-size: 12px;
+        overflow: hidden;
+        font-size: var(--fit-size, 12px);
+        line-height: 1.12;
         font-weight: 900;
         color: rgba(255, 255, 255, 0.88);
+        white-space: nowrap;
       }
 
       .recent-words {
@@ -576,10 +618,9 @@
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.22);
         color: white;
-        font-size: 10px;
+        font-size: var(--fit-size, 10px);
         font-weight: 1000;
         line-height: 1;
-        text-overflow: ellipsis;
         white-space: nowrap;
       }
 
@@ -665,7 +706,8 @@
       .board-wrap {
         min-height: 0;
         display: grid;
-        grid-template-rows: auto minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto;
+        align-content: start;
         gap: 6px;
       }
 
@@ -693,43 +735,50 @@
       .board-labels span:nth-child(5) { background: var(--cyan); }
 
       .board {
+        width: 100%;
+        aspect-ratio: 1;
         min-height: 0;
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
         grid-template-rows: repeat(5, minmax(0, 1fr));
         gap: 6px;
+        align-items: center;
       }
 
       .tile {
         position: relative;
+        width: 100%;
+        aspect-ratio: 1;
         min-width: 0;
-        min-height: 0;
         display: grid;
         place-items: center;
         align-content: center;
         gap: 3px;
         padding: 4px;
         border: 2px solid var(--line);
-        border-radius: 14px;
+        border-radius: 50%;
         background: linear-gradient(180deg, #ffffff 0%, #f5fbff 100%);
         color: #263241;
         box-shadow: 0 4px 0 rgba(7, 120, 202, 0.18);
         text-align: center;
+        transform: translate3d(0, 0, 0);
+        transition: transform 58ms ease-out, box-shadow 58ms ease-out;
       }
 
       .tile b {
         max-width: 100%;
         display: -webkit-box;
         overflow: hidden;
-        font-size: clamp(10px, 2.85vw, 13px);
+        font-size: var(--fit-size, clamp(10px, 2.85vw, 13px));
         line-height: 1.02;
         font-weight: 1000;
-        overflow-wrap: anywhere;
+        overflow-wrap: normal;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
       }
 
       .tile small {
+        display: none;
         max-width: 100%;
         overflow: hidden;
         color: #778897;
@@ -740,6 +789,15 @@
         white-space: nowrap;
       }
 
+      .phone.show-gloss .tile small {
+        display: block;
+      }
+
+      .tile:active {
+        transform: translate3d(0, 2px, 0) scale(0.98);
+        box-shadow: 0 1px 0 rgba(7, 120, 202, 0.14);
+      }
+
       .tile.is-called:not(.is-selected) {
         border-color: var(--yellow);
       }
@@ -747,6 +805,10 @@
       .tile.is-current:not(.is-selected) {
         transform: translateY(-2px);
         box-shadow: 0 6px 0 rgba(7, 120, 202, 0.2), 0 0 0 4px rgba(255, 201, 76, 0.28);
+      }
+
+      .tile.is-current:not(.is-selected):active {
+        transform: translate3d(0, 2px, 0) scale(0.98);
       }
 
       .tile.is-selected {
@@ -950,17 +1012,17 @@
         z-index: 8;
         left: 50%;
         top: 50%;
-        width: 250px;
-        min-height: 250px;
+        width: 292px;
+        min-height: 292px;
         display: grid;
         place-items: center;
         gap: 2px;
         padding: 0;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 26%, rgba(255, 255, 255, 0.74) 43%, rgba(255, 255, 255, 0.28) 62%, rgba(255, 255, 255, 0) 76%);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.97) 0 34%, rgba(255, 255, 255, 0.8) 52%, rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0) 84%);
         filter: drop-shadow(0 22px 42px rgba(0, 92, 150, 0.2));
         text-align: center;
-        contain: layout paint;
+        contain: layout;
         will-change: opacity, transform;
         transform: translate(-50%, -50%) scale(0.78);
       }
@@ -972,51 +1034,20 @@
       .feedback::before {
         content: "";
         position: absolute;
-        z-index: -1;
-        inset: -2px;
-        border-radius: 50%;
-        background:
-          radial-gradient(circle, rgba(255, 255, 255, 0.74) 0 24%, rgba(255, 236, 156, 0.44) 42%, rgba(255, 201, 76, 0.2) 58%, transparent 74%);
-        opacity: 0;
-        transform: scale(0.78);
-        animation: feedbackAura 860ms ease-out forwards;
-      }
-
-      .feedback.is-combo::before {
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.74) 0 24%, rgba(255, 236, 156, 0.44) 42%, rgba(255, 201, 76, 0.2) 58%, transparent 74%);
-      }
-
-      .feedback::after {
-        content: "";
-        position: absolute;
         z-index: 0;
-        inset: 0;
+        inset: -14px;
         border-radius: 50%;
         background:
-          radial-gradient(circle at 50% 7%, rgba(255, 201, 76, 0.74) 0 5px, transparent 13px),
-          radial-gradient(circle at 79% 22%, rgba(255, 201, 76, 0.6) 0 6px, transparent 15px),
-          radial-gradient(circle at 86% 58%, rgba(255, 201, 76, 0.52) 0 7px, transparent 17px),
-          radial-gradient(circle at 61% 87%, rgba(255, 201, 76, 0.58) 0 5px, transparent 15px),
-          radial-gradient(circle at 23% 75%, rgba(255, 201, 76, 0.5) 0 6px, transparent 16px),
-          radial-gradient(circle at 15% 30%, rgba(255, 201, 76, 0.56) 0 5px, transparent 14px),
-          radial-gradient(circle, transparent 0 42%, rgba(255, 201, 76, 0.18) 43%, rgba(255, 201, 76, 0.3) 48%, rgba(255, 201, 76, 0.12) 55%, transparent 68%);
+          radial-gradient(circle closest-side, transparent 0 46%, rgba(255, 245, 184, 0.66) 47% 49%, transparent 50%),
+          radial-gradient(circle closest-side, transparent 0 53%, rgba(255, 221, 104, 0.5) 54% 56%, transparent 57%),
+          radial-gradient(circle closest-side, transparent 0 60%, rgba(255, 201, 76, 0.32) 61% 63%, transparent 64%);
+        filter: drop-shadow(0 0 6px rgba(255, 201, 76, 0.32));
         opacity: 0;
-        transform: scale(0.76);
+        transform: scale(0.72);
       }
 
-      .feedback.is-combo::after {
-        background:
-          radial-gradient(circle at 50% 7%, rgba(255, 201, 76, 0.74) 0 5px, transparent 13px),
-          radial-gradient(circle at 79% 22%, rgba(255, 201, 76, 0.6) 0 6px, transparent 15px),
-          radial-gradient(circle at 86% 58%, rgba(255, 201, 76, 0.52) 0 7px, transparent 17px),
-          radial-gradient(circle at 61% 87%, rgba(255, 201, 76, 0.58) 0 5px, transparent 15px),
-          radial-gradient(circle at 23% 75%, rgba(255, 201, 76, 0.5) 0 6px, transparent 16px),
-          radial-gradient(circle at 15% 30%, rgba(255, 201, 76, 0.56) 0 5px, transparent 14px),
-          radial-gradient(circle, transparent 0 42%, rgba(255, 201, 76, 0.18) 43%, rgba(255, 201, 76, 0.3) 48%, rgba(255, 201, 76, 0.12) 55%, transparent 68%);
-      }
-
-      .feedback.is-visible::after {
-        animation: feedbackStarburst 1300ms ease-out forwards;
+      .feedback.is-visible::before {
+        animation: feedbackRings 1180ms ease-out forwards;
       }
 
       .feedback-content {
@@ -1031,21 +1062,21 @@
 
       .feedback-kicker {
         color: var(--pink);
-        font-size: 16px;
+        font-size: var(--fit-size, 16px);
         line-height: 1;
         font-weight: 1000;
       }
 
       .feedback-value {
         color: var(--blue-dark);
-        font-size: 46px;
+        font-size: var(--fit-size, 46px);
         line-height: 1;
         font-weight: 1000;
       }
 
       .feedback-caption {
         color: var(--muted);
-        font-size: 10px;
+        font-size: var(--fit-size, 10px);
         line-height: 1;
         font-weight: 1000;
       }
@@ -1132,17 +1163,11 @@
         100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
       }
 
-      @keyframes feedbackAura {
-        0% { opacity: 0; transform: scale(0.72); }
-        16% { opacity: 0.95; transform: scale(0.96); }
-        100% { opacity: 0; transform: scale(1.22); }
-      }
-
-      @keyframes feedbackStarburst {
-        0% { opacity: 0; transform: scale(0.78); }
-        18% { opacity: 0.92; transform: scale(1.02); }
-        58% { opacity: 0.42; }
-        100% { opacity: 0; transform: scale(1.28); }
+      @keyframes feedbackRings {
+        0% { opacity: 0; transform: scale(0.84); }
+        16% { opacity: 1; transform: scale(0.92); }
+        58% { opacity: 0.68; transform: scale(0.98); }
+        100% { opacity: 0; transform: scale(1.03); }
       }
 
       @keyframes particleBurst {
@@ -1286,7 +1311,7 @@
 
         .caller-card {
           grid-template-columns: 1fr 72px;
-          min-height: 104px;
+          height: 120px;
           padding: 12px;
         }
 
@@ -1299,12 +1324,8 @@
           gap: 5px;
         }
 
-        .board {
-          gap: 5px;
-        }
-
         .tile {
-          border-radius: 13px;
+          border-radius: 50%;
         }
 
         .board-footer {
@@ -1322,8 +1343,8 @@
         }
 
         .feedback {
-          width: 226px;
-          min-height: 226px;
+          width: 252px;
+          min-height: 252px;
         }
 
         .feedback-value {
@@ -1333,8 +1354,8 @@
     </style>
   </head>
   <body>
-    <main class="stage">
-      <div class="phone" aria-label="Pinu Bingo Challenge demo">
+    <main class="stage" id="stage">
+      <div class="phone" id="phone" aria-label="Pinu Bingo Challenge demo">
         <section class="screen app-screen home-screen is-active" id="homeScreen" aria-label="Pinu study home">
           <img class="app-bg" src="../项目截图/Pinu_首页.PNG" alt="Pinu study map screenshot" />
           <div class="app-tint"></div>
@@ -1523,6 +1544,7 @@
           </div>
         </section>
       </div>
+      <button class="gloss-toggle-demo" id="glossToggle" type="button" aria-pressed="false">释义<br />OFF</button>
     </main>
 
     <script>
@@ -1592,6 +1614,7 @@
       const state = {
         appTab: "home",
         returnTab: "home",
+        showGloss: false,
         board: [],
         queue: [],
         recentWords: [],
@@ -1624,8 +1647,12 @@
       };
 
       let audioContext = null;
+      let textFitFrame = 0;
 
       const els = {
+        stage: document.getElementById("stage"),
+        phone: document.getElementById("phone"),
+        glossToggle: document.getElementById("glossToggle"),
         homeScreen: document.getElementById("homeScreen"),
         tasksScreen: document.getElementById("tasksScreen"),
         profileScreen: document.getElementById("profileScreen"),
@@ -1767,12 +1794,16 @@
 
       function showOnlyGame() {
         setupFeedbackParticles();
+        els.stage.classList.add("is-game");
         document.querySelectorAll(".app-screen").forEach((screen) => screen.classList.remove("is-active"));
         els.gameScreen.classList.add("is-active");
+        renderGlossToggle();
+        scheduleTextFit();
       }
 
       function showApp(tabName) {
         resetGameState();
+        els.stage.classList.remove("is-game");
         els.gameScreen.classList.remove("is-active");
         document.querySelectorAll(".app-screen").forEach((screen) => screen.classList.remove("is-active"));
         const target = { home: els.homeScreen, tasks: els.tasksScreen, profile: els.profileScreen }[tabName] || els.homeScreen;
@@ -1781,6 +1812,57 @@
         document.querySelectorAll(".tab").forEach((tab) => {
           tab.classList.toggle("is-active", tab.dataset.tab === state.appTab);
         });
+      }
+
+      function toggleGloss() {
+        state.showGloss = !state.showGloss;
+        renderGlossToggle();
+      }
+
+      function renderGlossToggle() {
+        els.phone.classList.toggle("show-gloss", state.showGloss);
+        els.glossToggle.classList.toggle("is-on", state.showGloss);
+        els.glossToggle.setAttribute("aria-pressed", String(state.showGloss));
+        els.glossToggle.innerHTML = state.showGloss ? "释义<br />ON" : "释义<br />OFF";
+      }
+
+      function scheduleTextFit() {
+        window.cancelAnimationFrame(textFitFrame);
+        textFitFrame = window.requestAnimationFrame(() => {
+          textFitFrame = 0;
+          fitDynamicText();
+        });
+      }
+
+      function fitDynamicText() {
+        document
+          .querySelectorAll(".called-word, .call-subtitle, .recent-word, .tile b, .feedback-kicker, .feedback-value, .feedback-caption")
+          .forEach(fitTextElement);
+      }
+
+      function fitTextElement(element) {
+        if (!element.clientWidth || !element.clientHeight) return;
+        element.style.removeProperty("--fit-size");
+        const maxSize = Number.parseFloat(window.getComputedStyle(element).fontSize);
+        const minSize = getMinimumTextSize(element);
+        let size = maxSize;
+        while (size > minSize && textOverflows(element)) {
+          size -= 1;
+          element.style.setProperty("--fit-size", `${size}px`);
+        }
+      }
+
+      function textOverflows(element) {
+        return element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 1;
+      }
+
+      function getMinimumTextSize(element) {
+        if (element.matches(".called-word")) return 18;
+        if (element.matches(".feedback-value")) return 28;
+        if (element.matches(".feedback-kicker")) return 10;
+        if (element.matches(".tile b")) return 8;
+        if (element.matches(".recent-word")) return 6;
+        return 8;
       }
 
       function tick() {
@@ -1808,6 +1890,7 @@
         els.calledWord.textContent = next.es;
         els.callSubtitle.textContent = next.en;
         els.callCount.textContent = `${state.currentIndex}/${state.queue.length}`;
+        scheduleTextFit();
         setCallProgress(1);
         updateCallProgress();
         speak(next.es);
@@ -2029,6 +2112,7 @@
         els.recentWords.innerHTML = state.recentWords
           .map((word, index) => `<span class="recent-word${index === 0 ? " is-current" : ""}">${word}</span>`)
           .join("");
+        scheduleTextFit();
       }
 
       function getNearLineCells() {
@@ -2059,6 +2143,7 @@
         els.feedbackValue.textContent = value;
         els.feedbackCaption.textContent = caption;
         els.feedback.classList.toggle("is-combo", kind === "combo");
+        scheduleTextFit();
         renderFeedbackParticles(kind);
         els.feedback.classList.remove("is-visible");
         void els.feedback.offsetWidth;
@@ -2187,6 +2272,8 @@
       els.bingoButton.addEventListener("click", claimBingo);
       els.playAgain.addEventListener("click", () => startGame(state.returnTab));
       els.summaryHome.addEventListener("click", () => showApp(state.returnTab));
+      els.glossToggle.addEventListener("click", toggleGloss);
+      window.addEventListener("resize", scheduleTextFit);
       document.querySelectorAll(".tab").forEach((tab) => {
         tab.addEventListener("click", () => showApp(tab.dataset.tab));
       });
