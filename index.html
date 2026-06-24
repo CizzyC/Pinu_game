@@ -162,6 +162,11 @@
         object-fit: cover;
       }
 
+      .home-screen .app-bg,
+      .profile-screen .app-bg {
+        object-position: center top;
+      }
+
       .app-tint {
         position: absolute;
         inset: 0;
@@ -171,54 +176,211 @@
       .home-card {
         position: absolute;
         z-index: 4;
-        left: 30px;
-        right: 30px;
-        bottom: 138px;
-        min-height: 118px;
-        display: grid;
-        grid-template-columns: 88px 1fr;
-        gap: 12px;
-        align-items: center;
-        padding: 12px 14px;
-        border-radius: 28px;
+        left: 26px;
+        right: 26px;
+        bottom: 130px;
+        min-height: 152px;
+        overflow: hidden;
+        border-radius: 30px;
         background:
-          radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.48), transparent 28%),
-          linear-gradient(145deg, #0f9df1 0%, #24c4f3 66%, #7eedff 100%);
+          radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.68), transparent 22%),
+          radial-gradient(circle at 86% 28%, rgba(255, 221, 89, 0.45), transparent 26%),
+          linear-gradient(145deg, #0c86e4 0%, #12a7f3 52%, #39d4f4 100%);
         color: white;
-        box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.36), 0 9px 0 #0879cb, var(--soft-shadow);
+        box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.38), 0 9px 0 #0879cb, var(--soft-shadow);
+      }
+
+      .home-card.is-hidden {
+        display: none;
+      }
+
+      .home-card::before,
+      .home-card::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        border-radius: 999px;
+      }
+
+      .home-card::before {
+        width: 140px;
+        height: 140px;
+        right: -52px;
+        top: -44px;
+        border: 18px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 0 0 11px rgba(255, 201, 76, 0.24);
+        animation: entryRingSpin 6s linear infinite;
+      }
+
+      .home-card::after {
+        left: 20px;
+        right: 20px;
+        bottom: 11px;
+        height: 3px;
+        background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0 12px, transparent 12px 21px);
+        opacity: 0.36;
+        animation: entryDashMove 1.4s linear infinite;
+      }
+
+      .home-card-main {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        min-height: 152px;
+        display: grid;
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 13px;
+        align-items: center;
+        padding: 16px 16px 18px;
+        background: transparent;
         text-align: left;
       }
 
-      .home-card:active {
+      .home-card-main:active {
         transform: translateY(3px);
-        box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.36), 0 6px 0 #0879cb, var(--soft-shadow);
       }
 
+      .home-card-close {
+        position: absolute;
+        z-index: 3;
+        top: 12px;
+        right: 12px;
+        width: 26px;
+        height: 26px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        color: white;
+        font-size: 22px;
+        line-height: 1;
+        font-weight: 1000;
+        box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.32);
+      }
+
+      .home-card-close:active {
+        transform: scale(0.92);
+      }
+
+      .entry-visual {
+        position: relative;
+        min-height: 112px;
+        display: grid;
+        align-content: end;
+        justify-items: center;
+      }
+
+      .entry-go {
+        position: absolute;
+        right: 6px;
+        top: 5px;
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #fff7bd 0%, #ffc94c 100%);
+        color: #075f9c;
+        font-size: 11px;
+        font-weight: 1000;
+        box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.58), 0 6px 0 rgba(151, 91, 0, 0.24);
+        animation: entryGoBounce 1.2s ease-in-out infinite;
+      }
+
+      .entry-star {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 15px;
+        background: linear-gradient(180deg, #ff6fa4 0%, #f53f8b 100%);
+        color: white;
+        font-size: 22px;
+        font-weight: 1000;
+        box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.42), 0 6px 0 rgba(142, 28, 87, 0.24);
+        transform: rotate(-8deg);
+        animation: entryStarPop 1.7s ease-in-out infinite;
+      }
+
+      .entry-bingo-letters {
+        position: absolute;
+        left: 0;
+        top: 42px;
+        width: 86px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2px;
+      }
+
+      .entry-bingo-letters span {
+        height: 15px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        color: white;
+        font-size: 8px;
+        font-weight: 1000;
+        box-shadow: 0 3px 0 rgba(0, 70, 130, 0.18);
+      }
+
+      .entry-bingo-letters span:nth-child(1) { background: var(--pink); }
+      .entry-bingo-letters span:nth-child(2) { background: var(--yellow); color: #674800; }
+      .entry-bingo-letters span:nth-child(3) { background: var(--violet); }
+      .entry-bingo-letters span:nth-child(4) { background: var(--green); }
+      .entry-bingo-letters span:nth-child(5) { background: var(--cyan); }
+
       .mini-board {
-        width: 82px;
+        width: 64px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 4px;
-        padding: 8px;
-        border-radius: 20px;
-        background: rgba(5, 95, 165, 0.34);
+        gap: 3px;
+        padding: 5px;
+        border-radius: 15px;
+        background: rgba(5, 74, 150, 0.36);
+        box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.24), 0 12px 22px rgba(0, 75, 140, 0.2);
       }
 
       .mini-board span {
-        height: 17px;
-        border-radius: 7px;
+        height: 12px;
+        border-radius: 6px;
         background: rgba(255, 255, 255, 0.92);
+        animation: entryCellPulse 2.1s ease-in-out infinite;
       }
 
       .mini-board .hit {
         background: #a4f3ff;
+        box-shadow: 0 0 0 3px rgba(164, 243, 255, 0.2);
       }
 
       .mini-board .free {
         background: var(--yellow);
+        animation-delay: 220ms;
       }
 
-      .entry-kicker,
+      .entry-copy {
+        min-width: 0;
+        display: grid;
+        gap: 8px;
+        align-content: center;
+      }
+
+      .entry-kicker {
+        width: max-content;
+        max-width: 100%;
+        display: block;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #fff7a7 0%, #ffd54a 100%);
+        color: #075f9c;
+        font-size: 10px;
+        font-weight: 1000;
+        letter-spacing: 0.2px;
+        box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.58), 0 4px 0 rgba(151, 91, 0, 0.2);
+      }
+
       .task-kicker {
         width: max-content;
         max-width: 100%;
@@ -234,10 +396,11 @@
 
       .entry-title {
         display: block;
-        margin-top: 6px;
-        font-size: 25px;
+        min-width: 0;
+        font-size: 30px;
         line-height: 1;
         font-weight: 1000;
+        white-space: nowrap;
         text-shadow: 0 2px 0 rgba(5, 95, 165, 0.28);
       }
 
@@ -246,23 +409,56 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        margin-top: 10px;
       }
 
       .entry-best {
+        min-width: 0;
+        padding: 6px 9px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.94);
         font-size: 11px;
-        font-weight: 900;
+        font-weight: 1000;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .entry-play {
-        min-width: 66px;
-        padding: 10px 14px;
+        min-width: 72px;
+        padding: 10px 15px;
         border-radius: 999px;
-        background: white;
+        background: linear-gradient(180deg, #ffffff 0%, #effbff 100%);
         color: var(--blue-dark);
         font-size: 13px;
         font-weight: 1000;
         text-align: center;
+        box-shadow: 0 5px 0 rgba(0, 83, 145, 0.22);
+      }
+
+      @keyframes entryRingSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes entryDashMove {
+        from { background-position-x: 0; }
+        to { background-position-x: 21px; }
+      }
+
+      @keyframes entryGoBounce {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-5px) scale(1.04); }
+      }
+
+      @keyframes entryStarPop {
+        0%, 100% { transform: rotate(-8deg) scale(1); }
+        50% { transform: rotate(-2deg) scale(1.08); }
+      }
+
+      @keyframes entryCellPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(0.88); }
       }
 
       .tabbar {
@@ -310,17 +506,23 @@
       }
 
       .tasks-screen {
-        background: linear-gradient(180deg, #e6f8ff 0%, #ffffff 48%, #f7fbff 100%);
+        background:
+          radial-gradient(circle at 16% 4%, rgba(255, 255, 255, 0.8), transparent 18%),
+          linear-gradient(180deg, #dff7ff 0%, #f9fdff 48%, #eef9ff 100%);
       }
 
       .tasks-scroll {
         height: 100%;
         overflow: auto;
-        padding: 64px 28px 130px;
+        padding: 66px 26px 132px;
       }
 
       .tasks-title {
-        margin: 8px 0 18px;
+        margin: 7px 0 16px;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 12px;
       }
 
       .tasks-title small {
@@ -331,27 +533,57 @@
 
       .tasks-title h1 {
         margin: 2px 0 0;
-        font-size: 31px;
+        font-size: 30px;
         line-height: 1;
       }
 
+      .tasks-streak {
+        min-width: 70px;
+        padding: 8px 10px;
+        border-radius: 18px;
+        background: white;
+        color: var(--blue-dark);
+        font-size: 11px;
+        line-height: 1;
+        font-weight: 1000;
+        text-align: center;
+        box-shadow: 0 5px 0 rgba(7, 120, 202, 0.13);
+      }
+
       .task-card {
+        position: relative;
+        overflow: hidden;
         display: grid;
-        grid-template-columns: 1fr 96px;
-        gap: 14px;
+        grid-template-columns: minmax(0, 1fr) 88px;
+        gap: 12px;
         align-items: center;
         width: 100%;
-        padding: 16px;
-        border-radius: 26px;
-        background: linear-gradient(145deg, #1298ee 0%, #0d82d6 56%, #20c5ef 100%);
+        padding: 16px 16px 17px;
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at 88% 12%, rgba(255, 221, 89, 0.44), transparent 24%),
+          linear-gradient(145deg, #0c86e4 0%, #1298ee 54%, #20c5ef 100%);
         color: white;
         text-align: left;
-        box-shadow: var(--shadow), var(--soft-shadow);
+        box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.34), 0 8px 0 #0879cb, var(--soft-shadow);
+      }
+
+      .task-card::after {
+        content: "";
+        position: absolute;
+        right: -42px;
+        top: -52px;
+        width: 132px;
+        height: 132px;
+        border-radius: 50%;
+        border: 17px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 0 10px rgba(255, 201, 76, 0.16);
+        pointer-events: none;
       }
 
       .task-card h2 {
-        margin: 8px 0 5px;
-        font-size: 27px;
+        margin: 8px 0 6px;
+        font-size: 28px;
         line-height: 1;
       }
 
@@ -360,6 +592,12 @@
         color: rgba(255, 255, 255, 0.9);
         font-size: 13px;
         font-weight: 800;
+      }
+
+      .task-card > span {
+        position: relative;
+        z-index: 1;
+        min-width: 0;
       }
 
       .task-actions {
@@ -386,22 +624,24 @@
       }
 
       .task-preview {
+        position: relative;
+        z-index: 1;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 4px;
-        padding: 8px;
-        border-radius: 18px;
+        gap: 3px;
+        padding: 7px;
+        border-radius: 17px;
         background: rgba(5, 95, 165, 0.34);
       }
 
       .task-preview span {
-        min-height: 22px;
+        min-height: 19px;
         display: grid;
         place-items: center;
-        border-radius: 8px;
+        border-radius: 7px;
         background: rgba(255, 255, 255, 0.92);
         color: #213141;
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 1000;
       }
 
@@ -411,30 +651,74 @@
       }
 
       .quest-list {
-        margin-top: 26px;
+        margin-top: 22px;
         display: grid;
-        gap: 14px;
+        gap: 12px;
+      }
+
+      .quest-list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1px;
+        color: #172333;
+      }
+
+      .quest-list-header strong {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 1000;
+      }
+
+      .quest-list-header span {
+        color: var(--blue-dark);
+        font-size: 12px;
+        font-weight: 1000;
       }
 
       .quest {
         display: grid;
-        grid-template-columns: 1fr 54px;
-        gap: 14px;
+        grid-template-columns: 46px minmax(0, 1fr) 54px;
+        gap: 12px;
         align-items: center;
-        padding: 16px;
+        padding: 13px;
         border-radius: 22px;
         background: white;
-        box-shadow: 0 10px 24px rgba(0, 88, 140, 0.1);
+        box-shadow: 0 5px 0 rgba(7, 120, 202, 0.1), 0 12px 24px rgba(0, 88, 140, 0.08);
+      }
+
+      .quest-icon {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #e9fbff 0%, #c7f4ff 100%);
+        color: var(--blue-dark);
+        font-size: 18px;
+        font-weight: 1000;
+        box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.72);
       }
 
       .quest strong {
         display: block;
-        margin-bottom: 8px;
-        font-size: 17px;
+        margin-bottom: 5px;
+        font-size: 15px;
+        line-height: 1.08;
+      }
+
+      .quest-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 6px;
+        color: #6b7b87;
+        font-size: 11px;
+        font-weight: 900;
       }
 
       .progress-track {
-        height: 14px;
+        height: 12px;
         overflow: hidden;
         border-radius: 999px;
         background: #e7edf1;
@@ -448,13 +732,15 @@
       }
 
       .quest-prize {
-        height: 54px;
+        height: 50px;
         display: grid;
         place-items: center;
         border-radius: 16px;
         background: linear-gradient(180deg, #fff4a8, var(--yellow));
         color: #7a5200;
+        font-size: 12px;
         font-weight: 1000;
+        box-shadow: 0 4px 0 rgba(174, 111, 0, 0.16);
       }
 
       .game-screen {
@@ -1357,23 +1643,31 @@
     <main class="stage" id="stage">
       <div class="phone" id="phone" aria-label="Pinu Bingo Challenge demo">
         <section class="screen app-screen home-screen is-active" id="homeScreen" aria-label="Pinu study home">
-          <img class="app-bg" src="../项目截图/Pinu_首页.PNG" alt="Pinu study map screenshot" />
+          <img class="app-bg" src="../项目截图/首页.PNG" alt="Pinu study map screenshot" />
           <div class="app-tint"></div>
-          <button class="home-card" id="homePlay" type="button" aria-label="Start Bingo Challenge">
-            <span class="mini-board" aria-hidden="true">
-              <span class="hit"></span><span></span><span class="hit"></span>
-              <span></span><span class="free"></span><span></span>
-              <span class="hit"></span><span></span><span class="hit"></span>
-            </span>
-            <span>
-              <span class="entry-kicker">DAILY CHALLENGE</span>
-              <span class="entry-title">Bingo Challenge</span>
-              <span class="entry-row">
-                <span class="entry-best">Best Score 0</span>
-                <span class="entry-play">PLAY</span>
+          <div class="home-card" id="homeEntryCard">
+            <button class="home-card-main" id="homePlay" type="button" aria-label="Start Word Bingo">
+              <span class="entry-visual" aria-hidden="true">
+                <span class="entry-star">★</span>
+                <span class="entry-go">GO</span>
+                <span class="entry-bingo-letters"><span>B</span><span>I</span><span>N</span><span>G</span><span>O</span></span>
+                <span class="mini-board">
+                  <span class="hit"></span><span></span><span class="hit"></span>
+                  <span></span><span class="free"></span><span></span>
+                  <span class="hit"></span><span></span><span class="hit"></span>
+                </span>
               </span>
-            </span>
-          </button>
+              <span class="entry-copy">
+                <span class="entry-kicker">DAILY CHALLENGE</span>
+                <span class="entry-title">Word Bingo</span>
+                <span class="entry-row">
+                  <span class="entry-best">Best Score 0</span>
+                  <span class="entry-play">PLAY</span>
+                </span>
+              </span>
+            </button>
+            <button class="home-card-close" id="homeEntryClose" type="button" aria-label="Close Word Bingo card">×</button>
+          </div>
           <nav class="tabbar" aria-label="Pinu tabs">
             <button class="tab is-active" type="button" data-tab="home"><strong>S</strong><span>Study</span></button>
             <button class="tab" type="button" data-tab="tasks"><strong>T</strong><span>Tasks</span></button>
@@ -1388,46 +1682,59 @@
           </div>
           <div class="tasks-scroll">
             <div class="tasks-title">
-              <small>SECTION 1, UNIT 1</small>
-              <h1>Daily Tasks</h1>
+              <span>
+                <small>TODAY</small>
+                <h1>Daily Tasks</h1>
+              </span>
+              <span class="tasks-streak">3 DAY<br />STREAK</span>
             </div>
             <button class="task-card" id="taskPlay" type="button" aria-label="Start Bingo Challenge from tasks">
               <span>
-                <span class="task-kicker">WORD GAME</span>
-                <h2>Bingo Challenge</h2>
-                <p>Tap called words. Claim Bingo lines.</p>
+                <span class="task-kicker">PINNED CHALLENGE</span>
+                <h2>Word Bingo</h2>
+                <p>Tap called words. Claim lines before time runs out.</p>
                 <span class="task-actions">
                   <span class="play-now">Play now</span>
-                  <span class="reward">+60 XP</span>
+                  <span class="reward">Best 0</span>
                 </span>
               </span>
               <span class="task-preview" aria-hidden="true">
-                <span class="hit">si</span><span>pan</span><span class="hit">hola</span>
-                <span>no</span><span class="hit">P</span><span>cafe</span>
-                <span>agua</span><span>hoy</span><span class="hit">adios</span>
+                <span class="hit">B</span><span>I</span><span class="hit">N</span>
+                <span>G</span><span class="hit">P</span><span>O</span>
+                <span class="hit">si</span><span>pan</span><span class="hit">hoy</span>
               </span>
             </button>
-            <div class="quest-list" aria-label="Daily quest examples">
-              <div class="quest">
-                <span>
-                  <strong>Complete 1 unit</strong>
-                  <span class="progress-track"><span class="progress-fill" style="--value: 0%"></span></span>
-                </span>
-                <span class="quest-prize">XP</span>
+            <div class="quest-list" aria-label="Daily quests">
+              <div class="quest-list-header">
+                <strong>Daily Quests</strong>
+                <span>1/3 done</span>
               </div>
               <div class="quest">
+                <span class="quest-icon" aria-hidden="true">XP</span>
+                <span>
+                  <strong>Earn 50 XP</strong>
+                  <span class="quest-label"><span>35 / 50 XP</span><span>70%</span></span>
+                  <span class="progress-track"><span class="progress-fill" style="--value: 70%"></span></span>
+                </span>
+                <span class="quest-prize">+25</span>
+              </div>
+              <div class="quest">
+                <span class="quest-icon" aria-hidden="true">5</span>
                 <span>
                   <strong>Study for 5 minutes</strong>
-                  <span class="progress-track"><span class="progress-fill" style="--value: 35%"></span></span>
+                  <span class="quest-label"><span>2 / 5 min</span><span>40%</span></span>
+                  <span class="progress-track"><span class="progress-fill" style="--value: 40%"></span></span>
                 </span>
-                <span class="quest-prize">Coin</span>
+                <span class="quest-prize">+15</span>
               </div>
               <div class="quest">
+                <span class="quest-icon" aria-hidden="true">B</span>
                 <span>
                   <strong>Score 1 Bingo line</strong>
+                  <span class="quest-label"><span>0 / 1 line</span><span>0%</span></span>
                   <span class="progress-track"><span class="progress-fill" style="--value: 0%"></span></span>
                 </span>
-                <span class="quest-prize">Box</span>
+                <span class="quest-prize">BOX</span>
               </div>
             </div>
           </div>
@@ -1439,7 +1746,7 @@
         </section>
 
         <section class="screen app-screen profile-screen" id="profileScreen" aria-label="Pinu profile">
-          <img class="app-bg" src="../项目截图/Pinu_个人档案.PNG" alt="Pinu profile screenshot" />
+          <img class="app-bg" src="../项目截图/个人档案.PNG" alt="Pinu profile screenshot" />
           <nav class="tabbar" aria-label="Pinu tabs">
             <button class="tab" type="button" data-tab="home"><strong>S</strong><span>Study</span></button>
             <button class="tab" type="button" data-tab="tasks"><strong>T</strong><span>Tasks</span></button>
@@ -1657,6 +1964,8 @@
         tasksScreen: document.getElementById("tasksScreen"),
         profileScreen: document.getElementById("profileScreen"),
         gameScreen: document.getElementById("gameScreen"),
+        homeEntryCard: document.getElementById("homeEntryCard"),
+        homeEntryClose: document.getElementById("homeEntryClose"),
         homePlay: document.getElementById("homePlay"),
         taskPlay: document.getElementById("taskPlay"),
         backButton: document.getElementById("backButton"),
@@ -2267,6 +2576,7 @@
       }
 
       els.homePlay.addEventListener("click", () => startGame("home"));
+      els.homeEntryClose.addEventListener("click", () => els.homeEntryCard.classList.add("is-hidden"));
       els.taskPlay.addEventListener("click", () => startGame("tasks"));
       els.backButton.addEventListener("click", () => showApp(state.returnTab));
       els.bingoButton.addEventListener("click", claimBingo);
