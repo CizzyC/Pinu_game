@@ -168,10 +168,22 @@
         object-position: center top;
       }
 
+      .home-screen {
+        background:
+          radial-gradient(circle at 9% 6%, rgba(255, 255, 255, 0.68), transparent 16%),
+          linear-gradient(180deg, #cdf3ff 0%, #bdeeff 100%);
+      }
+
+      .home-screen .app-bg {
+        filter: saturate(1.05) contrast(0.98);
+      }
+
       .app-tint {
         position: absolute;
         inset: 0;
-        background: linear-gradient(180deg, rgba(208, 243, 255, 0.18) 0%, rgba(208, 243, 255, 0.1) 52%, rgba(208, 243, 255, 0.78) 100%);
+        background:
+          linear-gradient(180deg, rgba(208, 243, 255, 0.08) 0%, rgba(208, 243, 255, 0.02) 48%, rgba(208, 243, 255, 0.58) 100%),
+          radial-gradient(circle at 50% 83%, rgba(255, 255, 255, 0.22), transparent 24%);
       }
 
       .home-card {
@@ -229,10 +241,10 @@
         width: 100%;
         min-height: 152px;
         display: grid;
-        grid-template-columns: 112px minmax(0, 1fr);
-        gap: 13px;
+        grid-template-columns: 100px minmax(0, 1fr);
+        gap: 10px;
         align-items: center;
-        padding: 16px 16px 18px;
+        padding: 16px 15px 18px;
         background: transparent;
         text-align: left;
       }
@@ -398,7 +410,7 @@
       .entry-title {
         display: block;
         min-width: 0;
-        font-size: 30px;
+        font-size: 26px;
         line-height: 1;
         font-weight: 1000;
         white-space: nowrap;
@@ -508,47 +520,104 @@
 
       .tasks-screen {
         background:
-          radial-gradient(circle at 16% 4%, rgba(255, 255, 255, 0.8), transparent 18%),
-          linear-gradient(180deg, #dff7ff 0%, #f9fdff 48%, #eef9ff 100%);
+          radial-gradient(circle at 86% 9%, rgba(255, 255, 255, 0.66), transparent 18%),
+          linear-gradient(180deg, #1098ef 0 212px, #fbfdff 212px 100%);
       }
 
       .tasks-scroll {
         height: 100%;
         overflow: auto;
-        padding: 66px 26px 132px;
+        padding: 0 24px 132px;
+      }
+
+      .tasks-screen .status-bar {
+        color: white;
+      }
+
+      .tasks-hero {
+        position: relative;
+        min-height: 154px;
+        padding: 1px 0 18px;
+        color: white;
+      }
+
+      .tasks-hero::after {
+        content: "";
+        position: absolute;
+        right: -11px;
+        top: 10px;
+        width: 118px;
+        height: 118px;
+        border-radius: 42px 46px 34px 48px;
+        background:
+          radial-gradient(circle at 34% 31%, #b2f45b 0 14px, transparent 15px),
+          radial-gradient(circle at 64% 36%, #43c94f 0 40px, transparent 41px),
+          linear-gradient(145deg, #ffce42 0%, #ff9f2f 78%);
+        box-shadow: inset 0 5px 0 rgba(255, 255, 255, 0.32), 0 12px 0 rgba(5, 95, 165, 0.14);
+        transform: rotate(7deg);
       }
 
       .tasks-title {
-        margin: 7px 0 16px;
+        position: relative;
+        z-index: 2;
+        margin: 0;
         display: flex;
-        align-items: end;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 12px;
       }
 
       .tasks-title small {
-        color: var(--blue);
-        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 13px;
         font-weight: 1000;
       }
 
       .tasks-title h1 {
-        margin: 2px 0 0;
-        font-size: 30px;
+        margin: 7px 0 8px;
+        font-size: 28px;
         line-height: 1;
       }
 
       .tasks-streak {
-        min-width: 70px;
-        padding: 8px 10px;
-        border-radius: 18px;
-        background: white;
-        color: var(--blue-dark);
-        font-size: 11px;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 13px;
         line-height: 1;
         font-weight: 1000;
-        text-align: center;
-        box-shadow: 0 5px 0 rgba(7, 120, 202, 0.13);
+      }
+
+      .task-complete-card {
+        position: relative;
+        z-index: 3;
+        margin-top: -30px;
+        padding: 17px 18px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.96);
+        color: #2d3540;
+        box-shadow: 0 8px 0 rgba(7, 120, 202, 0.12), 0 18px 34px rgba(0, 77, 130, 0.12);
+      }
+
+      .task-complete-card strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 19px;
+        line-height: 1;
+        font-weight: 1000;
+      }
+
+      .task-complete-card .progress-track {
+        height: 18px;
+        background: #dce5eb;
+      }
+
+      .task-complete-card .progress-fill {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(90deg, #8b6cff 0%, #be77ff 100%);
+        color: white;
+        font-size: 12px;
+        font-weight: 1000;
       }
 
       .task-card {
@@ -559,11 +628,12 @@
         gap: 12px;
         align-items: center;
         width: 100%;
-        padding: 16px 16px 17px;
-        border-radius: 28px;
+        margin-top: 18px;
+        padding: 17px 16px 18px;
+        border-radius: 24px;
         background:
-          radial-gradient(circle at 88% 12%, rgba(255, 221, 89, 0.44), transparent 24%),
-          linear-gradient(145deg, #0c86e4 0%, #1298ee 54%, #20c5ef 100%);
+          radial-gradient(circle at 86% 18%, rgba(255, 221, 89, 0.52), transparent 24%),
+          linear-gradient(145deg, #087fd2 0%, #1298ee 48%, #25c9ee 100%);
         color: white;
         text-align: left;
         box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.34), 0 8px 0 #0879cb, var(--soft-shadow);
@@ -583,8 +653,8 @@
       }
 
       .task-card h2 {
-        margin: 8px 0 6px;
-        font-size: 28px;
+        margin: 8px 0 7px;
+        font-size: 27px;
         line-height: 1;
       }
 
@@ -652,59 +722,61 @@
       }
 
       .quest-list {
-        margin-top: 22px;
+        margin-top: 24px;
         display: grid;
-        gap: 12px;
+        gap: 17px;
       }
 
       .quest-list-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1px;
+        margin-bottom: -1px;
         color: #172333;
       }
 
       .quest-list-header strong {
-        font-size: 20px;
+        color: #959ba3;
+        font-size: 16px;
         line-height: 1;
         font-weight: 1000;
       }
 
       .quest-list-header span {
-        color: var(--blue-dark);
-        font-size: 12px;
+        color: #959ba3;
+        font-size: 13px;
         font-weight: 1000;
       }
 
       .quest {
         display: grid;
-        grid-template-columns: 46px minmax(0, 1fr) 54px;
-        gap: 12px;
+        grid-template-columns: minmax(0, 1fr) 58px;
+        gap: 16px;
         align-items: center;
-        padding: 13px;
-        border-radius: 22px;
-        background: white;
-        box-shadow: 0 5px 0 rgba(7, 120, 202, 0.1), 0 12px 24px rgba(0, 88, 140, 0.08);
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
       }
 
       .quest-icon {
-        width: 46px;
-        height: 46px;
+        width: 58px;
+        height: 58px;
         display: grid;
         place-items: center;
-        border-radius: 16px;
-        background: linear-gradient(180deg, #e9fbff 0%, #c7f4ff 100%);
-        color: var(--blue-dark);
-        font-size: 18px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #fff2a7 0%, #ffc94c 100%);
+        color: #8a5700;
+        font-size: 13px;
         font-weight: 1000;
-        box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.72);
+        box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.62), 0 5px 0 rgba(196, 124, 0, 0.2);
       }
 
       .quest strong {
         display: block;
-        margin-bottom: 5px;
-        font-size: 15px;
+        margin-bottom: 10px;
+        color: #3f444a;
+        font-size: 18px;
         line-height: 1.08;
       }
 
@@ -713,8 +785,8 @@
         justify-content: space-between;
         gap: 8px;
         margin-bottom: 6px;
-        color: #6b7b87;
-        font-size: 11px;
+        color: #9aa0a6;
+        font-size: 13px;
         font-weight: 900;
       }
 
@@ -729,19 +801,11 @@
         height: 100%;
         width: var(--value);
         border-radius: inherit;
-        background: linear-gradient(90deg, var(--yellow), #86e77f);
+        background: linear-gradient(90deg, #62d9ff 0%, #45c96d 100%);
       }
 
       .quest-prize {
-        height: 50px;
-        display: grid;
-        place-items: center;
-        border-radius: 16px;
-        background: linear-gradient(180deg, #fff4a8, var(--yellow));
-        color: #7a5200;
-        font-size: 12px;
-        font-weight: 1000;
-        box-shadow: 0 4px 0 rgba(174, 111, 0, 0.16);
+        display: none;
       }
 
       .game-screen {
@@ -1586,6 +1650,7 @@
         .stage {
           padding: 10px;
         }
+
         .game-inner {
           padding-inline: 18px;
           gap: 7px;
@@ -1677,21 +1742,27 @@
             <span class="status-icons"><span class="signal">|||</span><span>WiFi</span><span class="battery">91</span></span>
           </div>
           <div class="tasks-scroll">
-            <div class="tasks-title">
-              <span>
-                <small>TODAY</small>
-                <h1>Daily Tasks</h1>
-              </span>
-              <span class="tasks-streak">3 DAY<br />STREAK</span>
+            <div class="tasks-hero">
+              <div class="tasks-title">
+                <span>
+                  <h1>六月特别任务</h1>
+                  <small>8 天</small>
+                </span>
+                <span class="tasks-streak">连续完成 3 天</span>
+              </div>
+            </div>
+            <div class="task-complete-card" aria-label="Monthly challenge progress">
+              <strong>已完成挑战！</strong>
+              <span class="progress-track"><span class="progress-fill" style="--value: 100%">20 / 20</span></span>
             </div>
             <button class="task-card" id="taskPlay" type="button" aria-label="Start Bingo Challenge from tasks">
               <span>
-                <span class="task-kicker">PINNED CHALLENGE</span>
+                <span class="task-kicker">置顶挑战</span>
                 <h2>Word Bingo</h2>
-                <p>Tap called words. Claim lines before time runs out.</p>
+                <p>听单词、点词卡，在倒计时内连线领取 Bingo 奖励。</p>
                 <span class="task-actions">
-                  <span class="play-now">Play now</span>
-                  <span class="reward">Best 0</span>
+                  <span class="play-now">开始挑战</span>
+                  <span class="reward">最高分 0</span>
                 </span>
               </span>
               <span class="task-preview" aria-hidden="true">
@@ -1702,34 +1773,34 @@
             </button>
             <div class="quest-list" aria-label="Daily quests">
               <div class="quest-list-header">
-                <strong>Daily Quests</strong>
-                <span>1/3 done</span>
+                <strong>每日特别任务</strong>
+                <span>9 小时</span>
               </div>
               <div class="quest">
-                <span class="quest-icon" aria-hidden="true">XP</span>
                 <span>
-                  <strong>Earn 50 XP</strong>
-                  <span class="quest-label"><span>35 / 50 XP</span><span>70%</span></span>
-                  <span class="progress-track"><span class="progress-fill" style="--value: 70%"></span></span>
+                  <strong>完成 1 个单元</strong>
+                  <span class="quest-label"><span>0 / 1</span><span>0%</span></span>
+                  <span class="progress-track"><span class="progress-fill" style="--value: 0%"></span></span>
                 </span>
+                <span class="quest-icon" aria-hidden="true">木箱</span>
                 <span class="quest-prize">+25</span>
               </div>
               <div class="quest">
-                <span class="quest-icon" aria-hidden="true">5</span>
                 <span>
-                  <strong>Study for 5 minutes</strong>
-                  <span class="quest-label"><span>2 / 5 min</span><span>40%</span></span>
-                  <span class="progress-track"><span class="progress-fill" style="--value: 40%"></span></span>
+                  <strong>学习时长满 5 分钟</strong>
+                  <span class="quest-label"><span>0 / 5</span><span>0%</span></span>
+                  <span class="progress-track"><span class="progress-fill" style="--value: 0%"></span></span>
                 </span>
+                <span class="quest-icon" aria-hidden="true">蓝箱</span>
                 <span class="quest-prize">+15</span>
               </div>
               <div class="quest">
-                <span class="quest-icon" aria-hidden="true">B</span>
                 <span>
-                  <strong>Score 1 Bingo line</strong>
-                  <span class="quest-label"><span>0 / 1 line</span><span>0%</span></span>
+                  <strong>3 个单元至少答对 80%</strong>
+                  <span class="quest-label"><span>0 / 3</span><span>0%</span></span>
                   <span class="progress-track"><span class="progress-fill" style="--value: 0%"></span></span>
                 </span>
+                <span class="quest-icon" aria-hidden="true">金箱</span>
                 <span class="quest-prize">BOX</span>
               </div>
             </div>
@@ -1848,6 +1919,7 @@
         </section>
       </div>
       <button class="gloss-toggle-demo" id="glossToggle" type="button" aria-pressed="false">释义<br />OFF</button>
+      <audio id="callAudio" preload="auto" aria-hidden="true"></audio>
     </main>
 
     <script>
@@ -1950,12 +2022,16 @@
       };
 
       let audioContext = null;
+      let activeUtterance = null;
+      let preferredVoice = null;
+      let pendingSpeech = "";
       let textFitFrame = 0;
 
       const els = {
         stage: document.getElementById("stage"),
         phone: document.getElementById("phone"),
         glossToggle: document.getElementById("glossToggle"),
+        callAudio: document.getElementById("callAudio"),
         homeScreen: document.getElementById("homeScreen"),
         tasksScreen: document.getElementById("tasksScreen"),
         profileScreen: document.getElementById("profileScreen"),
@@ -2020,6 +2096,10 @@
         if ("speechSynthesis" in window) {
           window.speechSynthesis.cancel();
         }
+        els.callAudio.pause();
+        els.callAudio.currentTime = 0;
+        activeUtterance = null;
+        pendingSpeech = "";
         state.board = [];
         state.queue = [];
         state.recentWords = [];
@@ -2076,6 +2156,8 @@
 
       function startGame(sourceTab) {
         state.returnTab = sourceTab || state.appTab || "home";
+        prepareCallAudio();
+        prepareSpeech();
         resetGameState();
         buildBoard();
         showOnlyGame();
@@ -2198,18 +2280,107 @@
         scheduleTextFit();
         setCallProgress(1);
         updateCallProgress();
-        speak(next.es);
+        playCalledWordAudio(next.es);
         render();
       }
 
-      function speak(text) {
+      function playCalledWordAudio(text) {
+        const audio = prepareCallAudio();
+        if (!audio) {
+          speakWithBrowser(text);
+          return;
+        }
+        audio.pause();
+        audio.currentTime = 0;
+        audio.src = getWordAudioSrc(text);
+        audio.load();
+        const playRequest = audio.play();
+        if (playRequest?.catch) {
+          playRequest.catch(() => speakWithBrowser(text));
+        }
+      }
+
+      function prepareCallAudio() {
+        els.callAudio.preload = "auto";
+        els.callAudio.volume = 1;
+        return els.callAudio;
+      }
+
+      function getWordAudioSrc(text) {
+        return `assets/audio/call-${slugifyWord(text)}.m4a`;
+      }
+
+      function slugifyWord(text) {
+        return text
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+      }
+
+      function speakWithBrowser(text) {
         if (!("speechSynthesis" in window)) return;
-        window.speechSynthesis.cancel();
+        prepareSpeech();
+        pendingSpeech = text;
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "es-ES";
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+        utterance.lang = preferredVoice?.lang || "es-ES";
         utterance.rate = 0.88;
         utterance.pitch = 1.08;
-        window.speechSynthesis.speak(utterance);
+        utterance.volume = 1;
+        utterance.onend = () => {
+          if (activeUtterance === utterance) {
+            activeUtterance = null;
+          }
+        };
+        utterance.onerror = () => {
+          if (pendingSpeech === text && !preferredVoice && loadPreferredVoice()) {
+            window.setTimeout(() => speakWithBrowser(text), 80);
+          }
+        };
+        activeUtterance = utterance;
+        window.speechSynthesis.cancel();
+        window.setTimeout(() => {
+          if (!state.running || activeUtterance !== utterance) return;
+          window.speechSynthesis.speak(utterance);
+        }, 0);
+      }
+
+      function prepareSpeech() {
+        if (!("speechSynthesis" in window)) return;
+        loadPreferredVoice();
+        if (typeof window.speechSynthesis.resume === "function") {
+          window.speechSynthesis.resume();
+        }
+      }
+
+      function loadPreferredVoice() {
+        if (!("speechSynthesis" in window)) return false;
+        const voices = window.speechSynthesis.getVoices();
+        preferredVoice =
+          voices.find((voice) => voice.lang === "es-ES") ||
+          voices.find((voice) => voice.lang?.toLowerCase().startsWith("es")) ||
+          voices.find((voice) => /spanish|español/i.test(voice.name)) ||
+          null;
+        return Boolean(preferredVoice);
+      }
+
+      if ("speechSynthesis" in window) {
+        const handleVoicesChanged = () => {
+          const hadVoice = Boolean(preferredVoice);
+          const hasVoice = loadPreferredVoice();
+          if (!hadVoice && hasVoice && state.running && pendingSpeech) {
+            speakWithBrowser(pendingSpeech);
+          }
+        };
+        if (typeof window.speechSynthesis.addEventListener === "function") {
+          window.speechSynthesis.addEventListener("voiceschanged", handleVoicesChanged);
+        } else {
+          window.speechSynthesis.onvoiceschanged = handleVoicesChanged;
+        }
       }
 
       function setCallProgress(value) {
@@ -2340,6 +2511,10 @@
         if ("speechSynthesis" in window) {
           window.speechSynthesis.cancel();
         }
+        els.callAudio.pause();
+        els.callAudio.currentTime = 0;
+        activeUtterance = null;
+        pendingSpeech = "";
         els.finalScore.textContent = String(state.score);
         els.finalWords.textContent = String(state.correctClicks);
         els.finalBingos.textContent = String(state.claimedLines.size);
@@ -2588,7 +2763,15 @@
         state,
         startGame,
         claimBingo,
-        scoring: SCORING
+        scoring: SCORING,
+        getAudioDebug: () => ({
+          callAudioSrc: els.callAudio.currentSrc || els.callAudio.src || "",
+          callAudioPaused: els.callAudio.paused,
+          callAudioReadyState: els.callAudio.readyState,
+          callAudioNetworkState: els.callAudio.networkState,
+          speechSupported: "speechSynthesis" in window,
+          preferredVoice: preferredVoice ? { name: preferredVoice.name, lang: preferredVoice.lang } : null
+        })
       };
     </script>
   </body>
