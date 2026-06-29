@@ -82,14 +82,25 @@
         box-shadow: 0 24px 68px rgba(4, 104, 170, 0.3);
       }
 
-      .gloss-toggle-demo {
+      .side-demo-controls {
         position: absolute;
         z-index: 12;
         left: calc(50% + 230px);
         top: 50%;
+        display: none;
+        gap: 12px;
+        transform: translateY(-50%);
+      }
+
+      .stage.is-game .side-demo-controls {
+        display: grid;
+      }
+
+      .gloss-toggle-demo,
+      .language-pair-demo {
         width: 48px;
         min-height: 132px;
-        display: none;
+        display: grid;
         place-items: center;
         padding: 8px 6px;
         border-radius: 999px;
@@ -100,17 +111,17 @@
         line-height: 1.08;
         text-align: center;
         box-shadow: 0 12px 28px rgba(0, 82, 130, 0.14);
-        transform: translateY(-50%);
       }
 
-      .stage.is-game .gloss-toggle-demo {
-        display: grid;
-      }
-
-      .gloss-toggle-demo.is-on {
+      .gloss-toggle-demo.is-on,
+      .language-pair-demo {
         background: linear-gradient(180deg, #8cf5ff 0%, #20bef1 56%, #0e91df 100%);
         color: white;
         box-shadow: 0 8px 0 #0878ca, 0 16px 30px rgba(0, 82, 130, 0.18);
+      }
+
+      .language-pair-demo {
+        min-height: 104px;
       }
 
       .screen {
@@ -1918,7 +1929,10 @@
           </div>
         </section>
       </div>
-      <button class="gloss-toggle-demo" id="glossToggle" type="button" aria-pressed="false">释义<br />OFF</button>
+      <div class="side-demo-controls" aria-label="Demo vocabulary controls">
+        <button class="gloss-toggle-demo" id="glossToggle" type="button" aria-pressed="false">释义<br />OFF</button>
+        <button class="language-pair-demo" id="languagePairToggle" type="button">ES<br />→<br />EN</button>
+      </div>
       <audio id="callAudio" preload="auto" aria-hidden="true"></audio>
     </main>
 
@@ -1944,7 +1958,10 @@
         feverGainComboStep: 2
       };
 
-      const WORDS = [
+      const DEFAULT_LANGUAGE_PAIR = "es-en";
+      const LANGUAGE_PAIRS = ["es-en", "en-es"];
+      const VOCAB_UNIT_RANGE = "s1u1-s1u2-s1u3-s1u4";
+      const FALLBACK_WORDS = [
         { es: "hola", en: "hello" },
         { es: "adios", en: "goodbye" },
         { es: "gracias", en: "thanks" },
@@ -1990,6 +2007,9 @@
         appTab: "home",
         returnTab: "home",
         showGloss: false,
+        languagePair: DEFAULT_LANGUAGE_PAIR,
+        vocabByPair: {},
+        vocabStatus: "fallback",
         board: [],
         queue: [],
         recentWords: [],
@@ -2031,6 +2051,7 @@
         stage: document.getElementById("stage"),
         phone: document.getElementById("phone"),
         glossToggle: document.getElementById("glossToggle"),
+        languagePairToggle: document.getElementById("languagePairToggle"),
         callAudio: document.getElementById("callAudio"),
         homeScreen: document.getElementById("homeScreen"),
         tasksScreen: document.getElementById("tasksScreen"),
@@ -2085,6 +2106,70 @@
           .map(({ item }) => item);
       }
 
+      function getFallbackWords(languagePair) {
+        return FALLBACK_WORDS.map((word) =>
+          languagePair === "en-es"
+            ? { id: `fallback-${slugifyWord(word.en)}`, prompt: word.en, answer: word.es }
+            : { id: `fallback-${slugifyWord(word.es)}`, prompt: word.es, answer: word.en, audio: getWordAudioSrc(word.es) }
+        );
+      }
+
+      function getActiveWords() {
+        const loadedWords = state.vocabByPair[state.languagePair] || [];
+        if (loadedWords.length >= 24) {
+          state.vocabStatus = "loaded";
+          return loadedWords;
+        }
+        state.vocabStatus = loadedWords.length > 0 ? "fallback-too-short" : "fallback";
+        return getFallbackWords(state.languagePair);
+      }
+
+      async function loadVocabulary(languagePair) {
+        if (state.vocabByPair[languagePair]) return state.vocabByPair[languagePair];
+        const url = `data/vocab/${languagePair}/${VOCAB_UNIT_RANGE}.json`;
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) throw new Error(`Vocabulary request failed: ${response.status}`);
+          const payload = await response.json();
+          state.vocabByPair[languagePair] = Array.isArray(payload.items)
+            ? payload.items.map(mapExportItemToGameWord).filter((word) => word.prompt && word.answer)
+            : [];
+        } catch (_error) {
+          state.vocabByPair[languagePair] = [];
+        }
+        return state.vocabByPair[languagePair];
+      }
+
+      function mapExportItemToGameWord(item) {
+        return {
+          id: item.id || item.prompt,
+          unit: item.unit || "",
+          prompt: item.prompt || "",
+          answer: item.answer || "",
+          audio: item.audio || ""
+        };
+      }
+
+      function getLanguagePairLabel(languagePair) {
+        return languagePair
+          .split("-")
+          .map((part) => part.toUpperCase())
+          .join("<br />→<br />");
+      }
+
+      function toggleLanguagePair() {
+        const currentIndex = LANGUAGE_PAIRS.indexOf(state.languagePair);
+        state.languagePair = LANGUAGE_PAIRS[(currentIndex + 1) % LANGUAGE_PAIRS.length] || DEFAULT_LANGUAGE_PAIR;
+        preferredVoice = null;
+        renderLanguagePairToggle();
+        loadVocabulary(state.languagePair);
+      }
+
+      function renderLanguagePairToggle() {
+        els.languagePairToggle.innerHTML = getLanguagePairLabel(state.languagePair);
+        els.languagePairToggle.setAttribute("aria-label", `Switch language pair, current ${state.languagePair.toUpperCase()}`);
+      }
+
       function resetGameState() {
         window.clearInterval(state.timerId);
         window.clearInterval(state.callerId);
@@ -2132,14 +2217,10 @@
       }
 
       function buildBoard() {
-        const card = shuffle(WORDS).slice(0, 24);
-        card.splice(12, 0, { es: "PINU", en: "free", free: true });
+        const card = shuffle(getActiveWords()).slice(0, 24);
+        card.splice(12, 0, { prompt: "PINU", answer: "free", free: true });
         state.board = card;
-
-        const firstLine = shuffle(card.slice(0, 5).filter((word) => !word.free));
-        const firstLineWords = new Set(firstLine.map((word) => word.es));
-        const rest = shuffle(card.filter((word) => !word.free && !firstLineWords.has(word.es)));
-        state.queue = [...firstLine, ...rest];
+        state.queue = shuffle(card.filter((word) => !word.free));
 
         els.board.innerHTML = "";
         state.board.forEach((word, index) => {
@@ -2147,17 +2228,18 @@
           tile.type = "button";
           tile.className = "tile" + (word.free ? " is-free is-selected" : "");
           tile.dataset.index = String(index);
-          tile.dataset.word = word.es;
-          tile.innerHTML = `<b>${word.es}</b><small>${word.en}</small>`;
+          tile.dataset.word = word.prompt;
+          tile.innerHTML = `<b>${word.prompt}</b><small>${word.answer}</small>`;
           tile.addEventListener("click", () => handleTileClick(index));
           els.board.appendChild(tile);
         });
       }
 
-      function startGame(sourceTab) {
+      async function startGame(sourceTab) {
         state.returnTab = sourceTab || state.appTab || "home";
         prepareCallAudio();
         prepareSpeech();
+        await loadVocabulary(state.languagePair);
         resetGameState();
         buildBoard();
         showOnlyGame();
@@ -2185,6 +2267,7 @@
         document.querySelectorAll(".app-screen").forEach((screen) => screen.classList.remove("is-active"));
         els.gameScreen.classList.add("is-active");
         renderGlossToggle();
+        renderLanguagePairToggle();
         scheduleTextFit();
       }
 
@@ -2269,22 +2352,24 @@
           finishGame();
           return;
         }
-        state.currentWord = next.es;
+        state.currentWord = next.prompt;
         state.currentIndex += 1;
         state.callStartedAt = performance.now();
-        state.called.set(next.es, state.callStartedAt);
-        state.recentWords = [next.es, ...state.recentWords.filter((word) => word !== next.es)].slice(0, 5);
-        els.calledWord.textContent = next.es;
-        els.callSubtitle.textContent = next.en;
+        state.called.set(next.prompt, state.callStartedAt);
+        state.recentWords = [next.prompt, ...state.recentWords.filter((word) => word !== next.prompt)].slice(0, 5);
+        els.calledWord.textContent = next.prompt;
+        els.callSubtitle.textContent = next.answer;
         els.callCount.textContent = `${state.currentIndex}/${state.queue.length}`;
         scheduleTextFit();
         setCallProgress(1);
         updateCallProgress();
-        playCalledWordAudio(next.es);
+        playCalledWordAudio(next);
         render();
       }
 
-      function playCalledWordAudio(text) {
+      function playCalledWordAudio(word) {
+        const text = typeof word === "string" ? word : word.prompt;
+        const src = typeof word === "string" ? getWordAudioSrc(word) : word.audio || getWordAudioSrc(word.prompt);
         const audio = prepareCallAudio();
         if (!audio) {
           speakWithBrowser(text);
@@ -2292,7 +2377,7 @@
         }
         audio.pause();
         audio.currentTime = 0;
-        audio.src = getWordAudioSrc(text);
+        audio.src = src;
         audio.load();
         const playRequest = audio.play();
         if (playRequest?.catch) {
@@ -2327,7 +2412,7 @@
         if (preferredVoice) {
           utterance.voice = preferredVoice;
         }
-        utterance.lang = preferredVoice?.lang || "es-ES";
+        utterance.lang = preferredVoice?.lang || getSpeechLang();
         utterance.rate = 0.88;
         utterance.pitch = 1.08;
         utterance.volume = 1;
@@ -2360,12 +2445,20 @@
       function loadPreferredVoice() {
         if (!("speechSynthesis" in window)) return false;
         const voices = window.speechSynthesis.getVoices();
+        const speechLang = getSpeechLang();
+        const speechPrefix = speechLang.split("-")[0].toLowerCase();
         preferredVoice =
-          voices.find((voice) => voice.lang === "es-ES") ||
-          voices.find((voice) => voice.lang?.toLowerCase().startsWith("es")) ||
-          voices.find((voice) => /spanish|español/i.test(voice.name)) ||
+          voices.find((voice) => voice.lang === speechLang) ||
+          voices.find((voice) => voice.lang?.toLowerCase().startsWith(speechPrefix)) ||
+          voices.find((voice) => speechPrefix === "es" && /spanish|español/i.test(voice.name)) ||
+          voices.find((voice) => speechPrefix === "en" && /english/i.test(voice.name)) ||
           null;
         return Boolean(preferredVoice);
+      }
+
+      function getSpeechLang() {
+        const sourceLanguage = state.languagePair.split("-")[0];
+        return sourceLanguage === "en" ? "en-US" : sourceLanguage === "es" ? "es-ES" : sourceLanguage;
       }
 
       if ("speechSynthesis" in window) {
@@ -2402,12 +2495,12 @@
       function handleTileClick(index) {
         if (!state.running) return;
         const word = state.board[index];
-        if (!word || word.free || state.selected.has(index) || !state.called.has(word.es)) {
+        if (!word || word.free || state.selected.has(index) || !state.called.has(word.prompt)) {
           pulseInvalidTile(index);
           return;
         }
 
-        const elapsedSeconds = (performance.now() - state.called.get(word.es)) / 1000;
+        const elapsedSeconds = (performance.now() - state.called.get(word.prompt)) / 1000;
         state.combo += 1;
         state.maxCombo = Math.max(state.maxCombo, state.combo);
         const speedBonus = Math.max(0, Math.round(SCORING.clickSpeedStart - elapsedSeconds * SCORING.clickSpeedDecay));
@@ -2754,14 +2847,20 @@
       els.playAgain.addEventListener("click", () => startGame(state.returnTab));
       els.summaryHome.addEventListener("click", () => showApp(state.returnTab));
       els.glossToggle.addEventListener("click", toggleGloss);
+      els.languagePairToggle.addEventListener("click", toggleLanguagePair);
       window.addEventListener("resize", scheduleTextFit);
       document.querySelectorAll(".tab").forEach((tab) => {
         tab.addEventListener("click", () => showApp(tab.dataset.tab));
       });
 
+      renderLanguagePairToggle();
+      loadVocabulary(state.languagePair);
+
       window.__bingoChallenge = {
         state,
         startGame,
+        loadVocabulary,
+        toggleLanguagePair,
         claimBingo,
         scoring: SCORING,
         getAudioDebug: () => ({

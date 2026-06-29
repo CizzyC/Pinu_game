@@ -1,0 +1,193 @@
+:root {
+  --bg: #eefaff;
+  --panel: #ffffff;
+  --ink: #111827;
+  --muted: #667085;
+  --blue: #1298ee;
+  --blue-dark: #0878ca;
+  --line: #bdeeff;
+  --soft: #f2fbff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #f8fdff);
+  color: var(--ink);
+  font-family: ui-rounded, "Avenir Next", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.shell {
+  width: min(1060px, calc(100% - 32px));
+  margin: 28px auto;
+}
+
+.header,
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 14px 34px rgba(18, 152, 238, 0.12);
+}
+
+.header {
+  padding: 22px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.panel {
+  margin-top: 16px;
+  padding: 20px;
+}
+
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.upload-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+input,
+button {
+  min-height: 42px;
+  border-radius: 8px;
+  font: inherit;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #c9e9f8;
+  padding: 8px 12px;
+  background: white;
+}
+
+button {
+  border: 0;
+  padding: 0 18px;
+  background: var(--blue);
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.secondary-button {
+  background: #e9f8ff;
+  color: var(--blue-dark);
+}
+
+.confirm-button {
+  min-width: 112px;
+}
+
+.empty-state,
+.success,
+.warning {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.success {
+  color: #147a3b;
+}
+
+.warning {
+  color: #9a5b00;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.tabs button {
+  min-height: 34px;
+  padding: 0 12px;
+  background: #e9f8ff;
+  color: var(--blue-dark);
+}
+
+.tabs button.is-active {
+  background: var(--blue);
+  color: white;
+}
+
+.preview-window {
+  max-height: 440px;
+  overflow: auto;
+  border: 1px solid #e5f5fd;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid #e5f5fd;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #e9f8ff;
+  z-index: 1;
+}
+
+@media (max-width: 720px) {
+  .panel-title,
+  .upload-row {
+    display: block;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pinu 词库上传</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <div>
+          <h1>Pinu 词库上传</h1>
+          <p>上传词表，先预览自动识别的语言对，确认后写入当前题库。</p>
+        </div>
+      </header>
+
+      <section class="panel upload-panel">
+        <h2>上传词表</h2>
+        <form id="uploadForm" class="upload-row">
+          <input id="fileInput" name="file" type="file" accept=".xlsx,.xls,.csv,.tsv" required />
+          <button type="submit">预览</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <h2>上传后的题库预览</h2>
+          <button id="confirmImport" class="confirm-button" type="button" disabled>确认上传</button>
+        </div>
+        <div id="uploadedSummary" class="empty-state">请选择文件并点击预览。</div>
+        <div id="uploadedTabs" class="tabs"></div>
+        <div id="uploadedPreview" class="preview-window"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <h2>当前题库预览</h2>
+          <button id="refreshCurrent" class="secondary-button" type="button">刷新</button>
+        </div>
+        <div id="currentTabs" class="tabs"></div>
+        <div id="currentPreview" class="preview-window"></div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

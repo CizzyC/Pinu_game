@@ -1,0 +1,17 @@
+{
+  "name": "pinu-game",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "vocab:admin": "node tools/vocab-admin/src/server.mjs",
+    "vocab:import": "node tools/vocab-admin/src/import-file.mjs",
+    "vocab:export": "node tools/vocab-admin/src/export-json.mjs"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.2",
+    "xlsx": "^0.18.5"
+  }
+}

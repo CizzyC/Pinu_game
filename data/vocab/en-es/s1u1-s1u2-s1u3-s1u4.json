@@ -1,0 +1,273 @@
+{
+  "languagePair": "en-es",
+  "sourceLanguage": "en",
+  "targetLanguage": "es",
+  "courseCode": "pinu",
+  "unitRange": [
+    "s1u1",
+    "s1u2",
+    "s1u3",
+    "s1u4"
+  ],
+  "items": [
+    {
+      "id": "s1u1-coffee-cafe",
+      "unit": "s1u1",
+      "prompt": "coffee",
+      "answer": "café",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-goodbye-adios",
+      "unit": "s1u1",
+      "prompt": "goodbye",
+      "answer": "adiós",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-milk-leche",
+      "unit": "s1u1",
+      "prompt": "milk",
+      "answer": "leche",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-or-o",
+      "unit": "s1u1",
+      "prompt": "or",
+      "answer": "o",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-please-por-favoe",
+      "unit": "s1u1",
+      "prompt": "please",
+      "answer": "por favoe",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-tea-te",
+      "unit": "s1u1",
+      "prompt": "tea",
+      "answer": "té",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-thank-you-gracias",
+      "unit": "s1u1",
+      "prompt": "thank you",
+      "answer": "gracias",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-with-con",
+      "unit": "s1u1",
+      "prompt": "with",
+      "answer": "con",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-you-re-welcome-de-nada",
+      "unit": "s1u1",
+      "prompt": "you're welcome",
+      "answer": "de nada",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-from-de",
+      "unit": "s1u2",
+      "prompt": "from",
+      "answer": "de",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-good-bueno",
+      "unit": "s1u2",
+      "prompt": "good",
+      "answer": "bueno",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-how-are-you-que-tal",
+      "unit": "s1u2",
+      "prompt": "how are you",
+      "answer": "qué tal",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-is-es",
+      "unit": "s1u2",
+      "prompt": "is",
+      "answer": "es",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-morning-manana",
+      "unit": "s1u2",
+      "prompt": "morning",
+      "answer": "mañana",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-name-nombre",
+      "unit": "s1u2",
+      "prompt": "name",
+      "answer": "nombre",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-nice-to-meet-you-mucho-gusto",
+      "unit": "s1u2",
+      "prompt": "nice to meet you",
+      "answer": "mucho gusto",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-what-que",
+      "unit": "s1u2",
+      "prompt": "what",
+      "answer": "qué",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-you-tu",
+      "unit": "s1u2",
+      "prompt": "you",
+      "answer": "tú",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-have-tener",
+      "unit": "s1u3",
+      "prompt": "have",
+      "answer": "tener",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-help-ayuda",
+      "unit": "s1u3",
+      "prompt": "help",
+      "answer": "ayuda",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-hotel-hotel",
+      "unit": "s1u3",
+      "prompt": "hotel",
+      "answer": "hotel",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-in-en",
+      "unit": "s1u3",
+      "prompt": "in",
+      "answer": "en",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-need-necesitar",
+      "unit": "s1u3",
+      "prompt": "need",
+      "answer": "necesitar",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-passport-pasaporte",
+      "unit": "s1u3",
+      "prompt": "passport",
+      "answer": "pasaporte",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-reservation-reserva",
+      "unit": "s1u3",
+      "prompt": "reservation",
+      "answer": "reserva",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-ticket-billete",
+      "unit": "s1u3",
+      "prompt": "ticket",
+      "answer": "billete",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-train-tren",
+      "unit": "s1u3",
+      "prompt": "train",
+      "answer": "tren",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-where-donde",
+      "unit": "s1u3",
+      "prompt": "where",
+      "answer": "dónde",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-i-yo",
+      "unit": "s1u4",
+      "prompt": "I",
+      "answer": "yo",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-a-un",
+      "unit": "s1u4",
+      "prompt": "a",
+      "answer": "un",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-bill-cuenta",
+      "unit": "s1u4",
+      "prompt": "bill",
+      "answer": "cuenta",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-excuse-me-perdon",
+      "unit": "s1u4",
+      "prompt": "excuse me",
+      "answer": "perdón",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-rice-arroz",
+      "unit": "s1u4",
+      "prompt": "rice",
+      "answer": "arroz",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-salad-ensalada",
+      "unit": "s1u4",
+      "prompt": "salad",
+      "answer": "ensalada",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-soup-sopa",
+      "unit": "s1u4",
+      "prompt": "soup",
+      "answer": "sopa",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-table-mesa",
+      "unit": "s1u4",
+      "prompt": "table",
+      "answer": "mesa",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-three-tres",
+      "unit": "s1u4",
+      "prompt": "three",
+      "answer": "tres",
+      "audio": ""
+    }
+  ]
+}

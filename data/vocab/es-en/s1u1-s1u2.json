@@ -1,0 +1,138 @@
+{
+  "languagePair": "es-en",
+  "sourceLanguage": "es",
+  "targetLanguage": "en",
+  "courseCode": "pinu",
+  "unitRange": [
+    "s1u1",
+    "s1u2"
+  ],
+  "items": [
+    {
+      "id": "s1u1-adios-goodbye",
+      "unit": "s1u1",
+      "prompt": "adiós",
+      "answer": "goodbye",
+      "audio": "assets/audio/call-adios.m4a"
+    },
+    {
+      "id": "s1u1-cafe-coffee",
+      "unit": "s1u1",
+      "prompt": "café",
+      "answer": "coffee",
+      "audio": "assets/audio/call-cafe.m4a"
+    },
+    {
+      "id": "s1u1-con-with",
+      "unit": "s1u1",
+      "prompt": "con",
+      "answer": "with",
+      "audio": "assets/audio/call-con.m4a"
+    },
+    {
+      "id": "s1u1-de-nada-you-re-welcome",
+      "unit": "s1u1",
+      "prompt": "de nada",
+      "answer": "You're welcome.",
+      "audio": "assets/audio/call-de-nada.m4a"
+    },
+    {
+      "id": "s1u1-gracias-thank-you",
+      "unit": "s1u1",
+      "prompt": "gracias",
+      "answer": "thank you",
+      "audio": "assets/audio/call-gracias.m4a"
+    },
+    {
+      "id": "s1u1-leche-milk",
+      "unit": "s1u1",
+      "prompt": "leche",
+      "answer": "milk",
+      "audio": "assets/audio/call-leche.m4a"
+    },
+    {
+      "id": "s1u1-o-or",
+      "unit": "s1u1",
+      "prompt": "o",
+      "answer": "or",
+      "audio": "assets/audio/call-o.m4a"
+    },
+    {
+      "id": "s1u1-por-favoe-please",
+      "unit": "s1u1",
+      "prompt": "por favoe",
+      "answer": "please",
+      "audio": "assets/audio/call-por-favoe.m4a"
+    },
+    {
+      "id": "s1u1-te-tea",
+      "unit": "s1u1",
+      "prompt": "té",
+      "answer": "tea",
+      "audio": "assets/audio/call-te.m4a"
+    },
+    {
+      "id": "s1u2-bueno-good",
+      "unit": "s1u2",
+      "prompt": "bueno",
+      "answer": "good",
+      "audio": "assets/audio/call-bueno.m4a"
+    },
+    {
+      "id": "s1u2-de-from",
+      "unit": "s1u2",
+      "prompt": "de",
+      "answer": "from",
+      "audio": "assets/audio/call-de.m4a"
+    },
+    {
+      "id": "s1u2-es-is",
+      "unit": "s1u2",
+      "prompt": "es",
+      "answer": "is",
+      "audio": "assets/audio/call-es.m4a"
+    },
+    {
+      "id": "s1u2-manana-morning",
+      "unit": "s1u2",
+      "prompt": "mañana",
+      "answer": "morning",
+      "audio": "assets/audio/call-manana.m4a"
+    },
+    {
+      "id": "s1u2-mucho-gusto-nice-to-meet-you",
+      "unit": "s1u2",
+      "prompt": "mucho gusto",
+      "answer": "nice to meet you",
+      "audio": "assets/audio/call-mucho-gusto.m4a"
+    },
+    {
+      "id": "s1u2-nombre-name",
+      "unit": "s1u2",
+      "prompt": "nombre",
+      "answer": "name",
+      "audio": "assets/audio/call-nombre.m4a"
+    },
+    {
+      "id": "s1u2-que-what",
+      "unit": "s1u2",
+      "prompt": "qué",
+      "answer": "what",
+      "audio": "assets/audio/call-que.m4a"
+    },
+    {
+      "id": "s1u2-que-tal-how-are-you",
+      "unit": "s1u2",
+      "prompt": "qué tal",
+      "answer": "how are you",
+      "audio": "assets/audio/call-que-tal.m4a"
+    },
+    {
+      "id": "s1u2-tu-you",
+      "unit": "s1u2",
+      "prompt": "tú",
+      "answer": "you",
+      "audio": "assets/audio/call-tu.m4a"
+    }
+  ]
+}

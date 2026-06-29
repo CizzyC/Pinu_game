@@ -1,0 +1,138 @@
+{
+  "languagePair": "en-es",
+  "sourceLanguage": "en",
+  "targetLanguage": "es",
+  "courseCode": "pinu",
+  "unitRange": [
+    "s1u1",
+    "s1u2"
+  ],
+  "items": [
+    {
+      "id": "s1u1-you-re-welcome-de-nada",
+      "unit": "s1u1",
+      "prompt": "You're welcome.",
+      "answer": "de nada",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-coffee-cafe",
+      "unit": "s1u1",
+      "prompt": "coffee",
+      "answer": "café",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-goodbye-adios",
+      "unit": "s1u1",
+      "prompt": "goodbye",
+      "answer": "adiós",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-milk-leche",
+      "unit": "s1u1",
+      "prompt": "milk",
+      "answer": "leche",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-or-o",
+      "unit": "s1u1",
+      "prompt": "or",
+      "answer": "o",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-please-por-favoe",
+      "unit": "s1u1",
+      "prompt": "please",
+      "answer": "por favoe",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-tea-te",
+      "unit": "s1u1",
+      "prompt": "tea",
+      "answer": "té",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-thank-you-gracias",
+      "unit": "s1u1",
+      "prompt": "thank you",
+      "answer": "gracias",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-with-con",
+      "unit": "s1u1",
+      "prompt": "with",
+      "answer": "con",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-from-de",
+      "unit": "s1u2",
+      "prompt": "from",
+      "answer": "de",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-good-bueno",
+      "unit": "s1u2",
+      "prompt": "good",
+      "answer": "bueno",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-how-are-you-que-tal",
+      "unit": "s1u2",
+      "prompt": "how are you",
+      "answer": "qué tal",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-is-es",
+      "unit": "s1u2",
+      "prompt": "is",
+      "answer": "es",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-morning-manana",
+      "unit": "s1u2",
+      "prompt": "morning",
+      "answer": "mañana",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-name-nombre",
+      "unit": "s1u2",
+      "prompt": "name",
+      "answer": "nombre",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-nice-to-meet-you-mucho-gusto",
+      "unit": "s1u2",
+      "prompt": "nice to meet you",
+      "answer": "mucho gusto",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-what-que",
+      "unit": "s1u2",
+      "prompt": "what",
+      "answer": "qué",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-you-tu",
+      "unit": "s1u2",
+      "prompt": "you",
+      "answer": "tú",
+      "audio": ""
+    }
+  ]
+}

@@ -1,0 +1,497 @@
+{
+  "languagePair": "es-en",
+  "sourceLanguage": "es",
+  "targetLanguage": "en",
+  "courseCode": "pinu",
+  "unitRange": [
+    "s1u1",
+    "s1u2",
+    "s1u3",
+    "s1u4"
+  ],
+  "items": [
+    {
+      "id": "s1u1-adios-goodbye",
+      "unit": "s1u1",
+      "prompt": "adiós",
+      "answer": "goodbye",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-bueno-good",
+      "unit": "s1u1",
+      "prompt": "bueno",
+      "answer": "good",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-dia-morning",
+      "unit": "s1u1",
+      "prompt": "día",
+      "answer": "morning",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-encantado-nice-to-meet-you",
+      "unit": "s1u1",
+      "prompt": "encantado",
+      "answer": "Nice to meet you.",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-hola-hello",
+      "unit": "s1u1",
+      "prompt": "hola",
+      "answer": "hello",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-mucho-gusto-nice-to-meet-you-too",
+      "unit": "s1u1",
+      "prompt": "mucho gusto",
+      "answer": "Nice to meet you too.",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-noche-night",
+      "unit": "s1u1",
+      "prompt": "noche",
+      "answer": "night",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-ser-to-be",
+      "unit": "s1u1",
+      "prompt": "ser",
+      "answer": "to be",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-soy-i-am",
+      "unit": "s1u1",
+      "prompt": "soy",
+      "answer": "I am",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-tarde-afternoon",
+      "unit": "s1u1",
+      "prompt": "tarde",
+      "answer": "afternoon",
+      "audio": ""
+    },
+    {
+      "id": "s1u1-yo-i",
+      "unit": "s1u1",
+      "prompt": "yo",
+      "answer": "I",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-a-to",
+      "unit": "s1u2",
+      "prompt": "a",
+      "answer": "to",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-aqui-here",
+      "unit": "s1u2",
+      "prompt": "aquí",
+      "answer": "here",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-autobus-bus",
+      "unit": "s1u2",
+      "prompt": "autobús",
+      "answer": "bus",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-billete-ticket",
+      "unit": "s1u2",
+      "prompt": "billete",
+      "answer": "ticket",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-donde-where",
+      "unit": "s1u2",
+      "prompt": "dónde",
+      "answer": "where",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-el-the",
+      "unit": "s1u2",
+      "prompt": "el",
+      "answer": "the",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-en-in",
+      "unit": "s1u2",
+      "prompt": "en",
+      "answer": "in",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-estar-to-be",
+      "unit": "s1u2",
+      "prompt": "estar",
+      "answer": "to be",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-esta-it-is",
+      "unit": "s1u2",
+      "prompt": "está",
+      "answer": "it is",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-hotel-hotel",
+      "unit": "s1u2",
+      "prompt": "hotel",
+      "answer": "hotel",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-mi-my",
+      "unit": "s1u2",
+      "prompt": "mi",
+      "answer": "my",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-necesitar-to-need",
+      "unit": "s1u2",
+      "prompt": "necesitar",
+      "answer": "to need",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-necesitas-you-need",
+      "unit": "s1u2",
+      "prompt": "necesitas",
+      "answer": "you need",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-necesito-i-need",
+      "unit": "s1u2",
+      "prompt": "necesito",
+      "answer": "I need",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-no-no",
+      "unit": "s1u2",
+      "prompt": "no",
+      "answer": "no",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-pasaporte-passport",
+      "unit": "s1u2",
+      "prompt": "pasaporte",
+      "answer": "passport",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-por-favor-please",
+      "unit": "s1u2",
+      "prompt": "por favor",
+      "answer": "please",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-taxi-taxi",
+      "unit": "s1u2",
+      "prompt": "taxi",
+      "answer": "taxi",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-tu-your",
+      "unit": "s1u2",
+      "prompt": "tu",
+      "answer": "your",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-tu-you",
+      "unit": "s1u2",
+      "prompt": "tú",
+      "answer": "you",
+      "audio": ""
+    },
+    {
+      "id": "s1u2-un-a",
+      "unit": "s1u2",
+      "prompt": "un",
+      "answer": "a",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-bocadillo-sandwich",
+      "unit": "s1u3",
+      "prompt": "bocadillo",
+      "answer": "sandwich",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-cafe-coffee",
+      "unit": "s1u3",
+      "prompt": "café",
+      "answer": "coffee",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-con-with",
+      "unit": "s1u3",
+      "prompt": "con",
+      "answer": "with",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-de-of",
+      "unit": "s1u3",
+      "prompt": "de",
+      "answer": "of",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-dos-two",
+      "unit": "s1u3",
+      "prompt": "dos",
+      "answer": "two",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-jamon-ham",
+      "unit": "s1u3",
+      "prompt": "jamón",
+      "answer": "ham",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-leche-milk",
+      "unit": "s1u3",
+      "prompt": "leche",
+      "answer": "milk",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-mesa-table",
+      "unit": "s1u3",
+      "prompt": "mesa",
+      "answer": "table",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-o-or",
+      "unit": "s1u3",
+      "prompt": "o",
+      "answer": "or",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-para-for",
+      "unit": "s1u3",
+      "prompt": "para",
+      "answer": "for",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-querer-to-want",
+      "unit": "s1u3",
+      "prompt": "querer",
+      "answer": "to want",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-queso-cheese",
+      "unit": "s1u3",
+      "prompt": "queso",
+      "answer": "cheese",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-quieres-you-want",
+      "unit": "s1u3",
+      "prompt": "quieres",
+      "answer": "you want",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-quiero-i-want",
+      "unit": "s1u3",
+      "prompt": "quiero",
+      "answer": "I want",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-sin-without",
+      "unit": "s1u3",
+      "prompt": "sin",
+      "answer": "without",
+      "audio": ""
+    },
+    {
+      "id": "s1u3-tres-three",
+      "unit": "s1u3",
+      "prompt": "tres",
+      "answer": "three",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-bonito-pretty",
+      "unit": "s1u4",
+      "prompt": "bonito",
+      "answer": "pretty",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-elegante-elegant",
+      "unit": "s1u4",
+      "prompt": "elegante",
+      "answer": "elegant",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-es-he-she-is",
+      "unit": "s1u4",
+      "prompt": "es",
+      "answer": "he/she is",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-esposa-wife",
+      "unit": "s1u4",
+      "prompt": "esposa",
+      "answer": "wife",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-esposo-husband",
+      "unit": "s1u4",
+      "prompt": "esposo",
+      "answer": "husband",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-familia-family",
+      "unit": "s1u4",
+      "prompt": "familia",
+      "answer": "family",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-gato-gat",
+      "unit": "s1u4",
+      "prompt": "gato",
+      "answer": "gat",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-grande-big",
+      "unit": "s1u4",
+      "prompt": "grande",
+      "answer": "big",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-hermana-sister",
+      "unit": "s1u4",
+      "prompt": "hermana",
+      "answer": "sister",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-hermano-brother",
+      "unit": "s1u4",
+      "prompt": "hermano",
+      "answer": "brother",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-hijo-son",
+      "unit": "s1u4",
+      "prompt": "hijo",
+      "answer": "son",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-hijo-daughter",
+      "unit": "s1u4",
+      "prompt": "hijo",
+      "answer": "daughter",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-inteligente-intelligent",
+      "unit": "s1u4",
+      "prompt": "inteligente",
+      "answer": "intelligent",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-madre-mother",
+      "unit": "s1u4",
+      "prompt": "madre",
+      "answer": "mother",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-padre-father",
+      "unit": "s1u4",
+      "prompt": "padre",
+      "answer": "father",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-pequeno-small",
+      "unit": "s1u4",
+      "prompt": "pequeño",
+      "answer": "small",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-perro-dog",
+      "unit": "s1u4",
+      "prompt": "perro",
+      "answer": "dog",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-tener-to-have",
+      "unit": "s1u4",
+      "prompt": "tener",
+      "answer": "to have",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-tengo-i-have",
+      "unit": "s1u4",
+      "prompt": "tengo",
+      "answer": "I have",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-tienes-you-have",
+      "unit": "s1u4",
+      "prompt": "tienes",
+      "answer": "you have",
+      "audio": ""
+    },
+    {
+      "id": "s1u4-y-and",
+      "unit": "s1u4",
+      "prompt": "y",
+      "answer": "and",
+      "audio": ""
+    }
+  ]
+}
